@@ -165,11 +165,11 @@ int main() {
 		cout << "Total:        $ " << total_price << endl;
 		cout << "Amount Paid:  $ " << amount_paid << endl;
 		cout << "Change:       $ " << change << endl;
+		// Add 1 to drinks sold per interation of the while loop.
+		drinks_sold++;
 		// Re-run program.
 		system("pause");
 		cout << endl << endl;
-		// Add 1 to drinks sold per interation of the while loop.
-		drinks_sold++;
 	}
 	// Shutdown report.
 	cout << endl << "SHUTDOWN: Totals sold: " << drinks_sold << endl;

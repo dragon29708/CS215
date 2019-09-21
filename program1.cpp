@@ -37,7 +37,7 @@ int main() {
 	cout << setw(10) << "Mocha Tank:  "; cin >> tank_mocha;
 	cout << endl;
 	// While the escape char isn't inputted.
-	while (input_raw != "!") {
+	while (true) {
 		// Print out menu.
 		cout << "PLEASE SELECT YOUR BEVERAGE!" << endl;
 		cout << "C. Coffee   $ 0.15 per oz." << endl;
@@ -47,6 +47,8 @@ int main() {
 		// USE THE FIND() FUNCTION IN <STRING>
 		// string::npos
 		cout << "===> "; cin >> input_raw;
+		if (input_raw[0] == '!')
+			break;
 		while (input_bool != true) {
 			input_usable = toupper(input_raw[0]);
 			if ((input_usable == 'C') && (tank_coffee != 0))

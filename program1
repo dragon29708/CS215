@@ -1,6 +1,6 @@
 /*
 --------------------------------------------------------------------
-       					CS215-401 Program 1
+						CS215-401 Program 1
 --------------------------------------------------------------------
 Author: Andrew Cassidy
 Date: 9/17/2019
@@ -18,26 +18,26 @@ using namespace std;
 
 int main() {
 	// Declaring variables.
-	const double price_coffee = 0.15, price_latte = 0.25, price_mocha = 0.30, tax = 0.06;
+	const double price_coffee = 0.15, price_latte = 0.25, price_mocha = 0.30, tax_rate = 0.06;
 	const int sleepMSecs = 2000;
 	unsigned int tank_coffee, tank_latte, tank_mocha, drink_size;
 	string input_raw = "";
 	char input_usable;
 	bool input_bool = false, drink_bool = false, payment_bool = false;
-	double total_price, amount_paid;
+	double total_price, amount_paid, total_tax, subtotal;
+	// Print out logo.
+	cout << "+----------------------------------+\n";
+	cout << "|           CAFE' VEND             |\n";
+	cout << "|       by: Andrew Cassidy         |\n";
+	cout << "+----------------------------------+\n";
+	// Start up menu for mantenance worker.
+	cout << "STARTUP: Enter tank levels" << endl;
+	cout << setw(10) << "Coffee Tank: "; cin >> tank_coffee;
+	cout << setw(10) << "Latte Tank:  "; cin >> tank_latte;
+	cout << setw(10) << "Mocha Tank:  "; cin >> tank_mocha;
+	cout << endl;
 	// While the escape char isn't inputted.
 	while (input_raw != "!") {
-		// Print out logo.
-		cout << "+----------------------------------+\n";
-		cout << "|           CAFE' VEND             |\n";
-		cout << "|       by: Andrew Cassidy         |\n";
-		cout << "+----------------------------------+\n";
-		// Start up menu for mantenance worker.
-		cout << "STARTUP: Enter tank levels" << endl;
-		cout << setw(10) << "Coffee Tank: "; cin >> tank_coffee;
-		cout << setw(10) << "Latte Tank:  "; cin >> tank_latte;
-		cout << setw(10) << "Mocha Tank:  "; cin >> tank_mocha;
-		cout << endl;
 		// Print out menu.
 		cout << "PLEASE SELECT YOUR BEVERAGE!" << endl;
 		cout << "C. Coffee   $ 0.15 per oz." << endl;
@@ -70,19 +70,15 @@ int main() {
 				cout << "Number of ounces (9-18): "; cin >> drink_size;
 			}
 		}
-		// Calculate total price.
-		if (input_usable == 'C') {
-			total_price = price_coffee * drink_size + (price_coffee * drink_size) * tax;
-			total_price = round(total_price * 100) / 100;
-		}
-		else if (input_usable == 'L') {
-			total_price = price_latte * drink_size + (price_latte * drink_size) * tax;
-			total_price = round(total_price * 100) / 100;
-		}
-		else {
-			total_price = price_mocha * drink_size + (price_mocha * drink_size) * tax;
-			total_price = round(total_price * 100) / 100;
-		}
+		// Calculate subtotal, tax amount and total price.
+		if (input_usable == 'C')
+			subtotal = price_coffee * drink_size;
+		else if (input_usable == 'L')
+			subtotal = price_latte * drink_size;
+		else
+			subtotal = price_mocha * drink_size;
+		total_tax = subtotal * tax_rate;
+		total_price = round((subtotal + total_tax) * 100) / 100;
 		// Display total price and ask for user to pay.
 		cout << "Total Price:       $ " << total_price << endl;
 		cout << "Enter amount paid: $ "; cin >> amount_paid;
@@ -95,7 +91,7 @@ int main() {
 			else
 				payment_bool = true;
 		}
-		// Print the change, thank user for purchase and start the brewing!
+		// Print the change and thank user for purchase.
 		cout << "Your change $ " << amount_paid - total_price << " falls out of the machine on the floor." << endl;
 		if (input_usable == 'C')
 			cout << "Thank you! Your Coffee will now be brewed!" << endl;
@@ -104,7 +100,24 @@ int main() {
 		else
 			cout << "Thank you! Your Mocha will now be brewed!" << endl;
 		// Display the brewing happening.
+		Sleep(sleepMSecs);
 		cout << endl << "A cup drops out of the machine below the Mocha spigot." << endl;
+		Sleep(sleepMSecs);
+		for (int i = 3; i <= drink_size; i += 3) {
+			cout << " " << i << " ounces dispenced..." << endl;
+			Sleep(sleepMSecs);
+		}
+		if ((drink_size % 3) != 0) {
+			cout << " " << drink_size << " ounces dispenced..." << endl;
+			Sleep(sleepMSecs);
+		}
+		// Display receipt.
+		if (input_usable == 'C')
+			cout << endl << "Your Coffee is ready! Here is your receipt!" << endl;
+		else if (input_usable == 'L')
+			cout << endl << "Your Latte is ready! Here is your receipt!" << endl;
+		else
+			cout << endl << "Your Mocha is ready! Here is your receipt!" << endl;
 	}
 	// Ending statements.
 	system("pause");

@@ -20,11 +20,10 @@ int main() {
 	// Declaring variables.
 	const double price_coffee = 0.15, price_latte = 0.25, price_mocha = 0.30, tax_rate = 0.06;
 	const int sleepMSecs = 2000;
-	unsigned int tank_coffee, tank_latte, tank_mocha, drink_size;
+	int tank_coffee = 18, tank_latte = 18, tank_mocha = 18, drinks_sold = 0, drink_size;
 	string input_raw = "";
 	char input_usable;
-	bool input_bool = false, drink_bool = false, payment_bool = false;
-	double total_price, amount_paid, total_tax, subtotal, change;
+	double total_price, amount_paid, total_tax, subtotal, change, total_coffee = 0.0, total_latte = 0.0, total_mocha = 0.0;
 	// Print out logo.
 	cout << "+----------------------------------+\n";
 	cout << "|           CAFE' VEND             |\n";
@@ -38,24 +37,30 @@ int main() {
 	cout << endl;
 	// While the escape char isn't inputted.
 	while (true) {
+		// Bool variables that need to be re-initialized each interation of while loop.
+		bool input_bool = false, drink_bool = false, payment_bool = false;
 		// Print out menu.
-		cout << "PLEASE SELECT YOUR BEVERAGE!" << endl;
-		cout << "C. Coffee   $ 0.15 per oz." << endl;
-		cout << "L. Latte    $ 0.25 per oz." << endl;
-		cout << "M. Mocha    $ 0.30 per oz." << endl;
+		if ((tank_coffee < 18) && (tank_latte < 18) && (tank_mocha))
+			cout << "ALL DRINK TANKS EMPTY. PLEASE REFILL!" << endl;
+		else
+			cout << "PLEASE SELECT YOUR BEVERAGE!" << endl;
+		if (tank_coffee >= 18)
+			cout << "C. Coffee   $ 0.15 per oz." << endl;
+		if (tank_latte >= 18)
+			cout << "L. Latte    $ 0.25 per oz." << endl;
+		if (tank_mocha >= 18)
+			cout << "M. Mocha    $ 0.30 per oz." << endl;
 		// Get drink from user.
-		// USE THE FIND() FUNCTION IN <STRING>
-		// string::npos
 		cout << "===> "; cin >> input_raw;
 		if (input_raw[0] == '!')
 			break;
 		while (input_bool != true) {
 			input_usable = toupper(input_raw[0]);
-			if ((input_usable == 'C') && (tank_coffee != 0))
+			if ((input_usable == 'C') && (tank_coffee >= 18))
 				input_bool = true;
-			else if ((input_usable == 'L') && (tank_latte != 0))
+			else if ((input_usable == 'L') && (tank_latte >= 18))
 				input_bool = true;
-			else if ((input_usable == 'M') && (tank_mocha != 0))
+			else if ((input_usable == 'M') && (tank_mocha >= 18))
 				input_bool = true;
 			else {
 				cout << "Invalid selection! Try again!" << endl;
@@ -65,8 +70,17 @@ int main() {
 		// Get amount (oz) from user.
 		cout << "Number of ounces (9-18): "; cin >> drink_size;
 		while (drink_bool != true) {
-			if ((drink_size >= 9) && (drink_size <= 18))
+			if ((drink_size >= 9) && (drink_size <= 18)) {
 				drink_bool = true;
+				if (input_usable == 'C') {
+					tank_coffee -= drink_size;
+				}
+				else if (input_usable == 'L') {
+					tank_latte -= drink_size;
+				}
+				else
+					tank_mocha -= drink_size;
+			}
 			else {
 				cout << "Invalid entry!" << endl;
 				cout << "Number of ounces (9-18): "; cin >> drink_size;
@@ -96,12 +110,18 @@ int main() {
 		// Print the change and thank user for purchase.
 		change = amount_paid - total_price;
 		cout << "Your change $ " << change << " falls out of the machine on the floor." << endl;
-		if (input_usable == 'C')
+		if (input_usable == 'C') {
 			cout << "Thank you! Your Coffee will now be brewed!" << endl;
-		else if (input_usable == 'L')
+			total_coffee += subtotal;
+		}
+		else if (input_usable == 'L') {
 			cout << "Thank you! Your Latte will now be brewed!" << endl;
-		else
+			total_latte += subtotal;
+		}
+		else {
 			cout << "Thank you! Your Mocha will now be brewed!" << endl;
+			total_mocha += subtotal;
+		}
 		// Display the brewing happening.
 		Sleep(sleepMSecs);
 		cout << endl << "A cup drops out of the machine below the Mocha spigot." << endl;
@@ -142,8 +162,11 @@ int main() {
 		cout << "Change:       $ " << change << endl;
 		// Re-run program.
 		system("pause");
-		cout << endl << endl << endl;
+		cout << endl << endl;
+		// Add 1 to drinks sold per interation of the while loop.
+		drinks_sold++;
 	}
+	// Shutdown report.
 	// Ending statements.
 	system("pause");
 	return 0;

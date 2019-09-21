@@ -21,6 +21,7 @@ int main() {
 	const double price_coffee = 0.15, price_latte = 0.25, price_mocha = 0.30, tax_rate = 0.06;
 	const int sleepMSecs = 2000;
 	int tank_coffee = 18, tank_latte = 18, tank_mocha = 18, drinks_sold = 0, drink_size;
+	int ounces_bought_coffee = 0, ounces_bought_latte = 0, ounces_bought_mocha = 0;
 	string input_raw = "";
 	char input_usable;
 	double total_price, amount_paid, total_tax, subtotal, change, total_coffee = 0.0, total_latte = 0.0, total_mocha = 0.0;
@@ -74,12 +75,16 @@ int main() {
 				drink_bool = true;
 				if (input_usable == 'C') {
 					tank_coffee -= drink_size;
+					ounces_bought_coffee += drink_size;
 				}
 				else if (input_usable == 'L') {
 					tank_latte -= drink_size;
+					ounces_bought_latte += drink_size;
 				}
-				else
+				else {
 					tank_mocha -= drink_size;
+					ounces_bought_mocha += drink_size;
+				}
 			}
 			else {
 				cout << "Invalid entry!" << endl;
@@ -167,6 +172,13 @@ int main() {
 		drinks_sold++;
 	}
 	// Shutdown report.
+	cout << endl << "SHUTDOWN: Totals sold: " << drinks_sold << endl;
+	cout << "BEVERAGE  OUNCES  TOTAL SOLD  LEFT IN TANK" << endl;
+	cout << "--------  ------  ----------  ------------" << endl;
+	cout << "Coffee        " << ounces_bought_coffee << "   $    " << total_coffee << "               " << tank_coffee << endl;
+	cout << "Latte         " << ounces_bought_latte <<  "   $    " << total_latte << "               " << tank_latte << endl;
+	cout << "Mocha         " << ounces_bought_mocha <<  "   $    " << total_mocha << "               " << tank_mocha << endl;
+	cout << "TOTAL         " << "    $" << total_coffee + total_latte + total_mocha << endl;
 	// Ending statements.
 	system("pause");
 	return 0;

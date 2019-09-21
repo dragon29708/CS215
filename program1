@@ -24,7 +24,7 @@ int main() {
 	string input_raw = "";
 	char input_usable;
 	bool input_bool = false, drink_bool = false, payment_bool = false;
-	double total_price, amount_paid, total_tax, subtotal;
+	double total_price, amount_paid, total_tax, subtotal, change;
 	// Print out logo.
 	cout << "+----------------------------------+\n";
 	cout << "|           CAFE' VEND             |\n";
@@ -92,7 +92,8 @@ int main() {
 				payment_bool = true;
 		}
 		// Print the change and thank user for purchase.
-		cout << "Your change $ " << amount_paid - total_price << " falls out of the machine on the floor." << endl;
+		change = amount_paid - total_price;
+		cout << "Your change $ " << change << " falls out of the machine on the floor." << endl;
 		if (input_usable == 'C')
 			cout << "Thank you! Your Coffee will now be brewed!" << endl;
 		else if (input_usable == 'L')
@@ -111,13 +112,35 @@ int main() {
 			cout << " " << drink_size << " ounces dispenced..." << endl;
 			Sleep(sleepMSecs);
 		}
+		// Make sure all numbers have two digits after the decimal.
+		cout << setprecision(2) << fixed;
 		// Display receipt.
-		if (input_usable == 'C')
+		if (input_usable == 'C') {
 			cout << endl << "Your Coffee is ready! Here is your receipt!" << endl;
-		else if (input_usable == 'L')
+			cout << "Beverage:       Coffee" << endl;
+			cout << "Ounces:         " << drink_size << endl;
+			cout << "Price per Oz: $ " << price_coffee << endl;
+		}
+		else if (input_usable == 'L') {
 			cout << endl << "Your Latte is ready! Here is your receipt!" << endl;
-		else
+			cout << "Beverage:       Latte" << endl;
+			cout << "Ounces:         " << drink_size << endl;
+			cout << "Price per Oz: $ " << price_latte << endl;
+		}
+		else {
 			cout << endl << "Your Mocha is ready! Here is your receipt!" << endl;
+			cout << "Beverage:       Mocha" << endl;
+			cout << "Ounces:         " << drink_size << endl;
+			cout << "Price per Oz: $ " << price_mocha << endl;
+		}
+		cout << "Sub Total:    $ " << subtotal << endl;
+		cout << "Tax:          $ " << total_tax << endl;
+		cout << "Total:        $ " << total_price << endl;
+		cout << "Amount Paid:  $ " << amount_paid << endl;
+		cout << "Change:       $ " << change << endl;
+		// Re-run program.
+		system("pause");
+		cout << endl << endl << endl;
 	}
 	// Ending statements.
 	system("pause");

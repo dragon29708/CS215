@@ -25,19 +25,23 @@ int main() {
 	string input_raw = "";
 	char input_usable;
 	double total_price, amount_paid, total_tax, subtotal, change, total_coffee = 0.0, total_latte = 0.0, total_mocha = 0.0;
+
 	// Print out logo.
 	cout << "+----------------------------------+\n";
 	cout << "|           CAFE' VEND             |\n";
 	cout << "|       by: Andrew Cassidy         |\n";
 	cout << "+----------------------------------+\n";
+
 	// Start up menu for mantenance worker.
 	cout << "STARTUP: Enter tank levels" << endl;
 	cout << setw(10) << "Coffee Tank: "; cin >> tank_coffee;
 	cout << setw(10) << "Latte Tank:  "; cin >> tank_latte;
 	cout << setw(10) << "Mocha Tank:  "; cin >> tank_mocha;
 	cout << endl;
+
 	// While the escape char isn't inputted.
 	while (true) {
+
 		// Bool variables that need to be re-initialized each interation of while loop.
 		bool input_bool = false, drink_bool = false, payment_bool = false;
 		// Print out menu.
@@ -51,6 +55,7 @@ int main() {
 			cout << "L. Latte    $ 0.25 per oz." << endl;
 		if (tank_mocha >= 18)
 			cout << "M. Mocha    $ 0.30 per oz." << endl;
+
 		// Get drink from user.
 		cout << "===> "; cin >> input_raw;
 		if (input_raw[0] == '!')
@@ -68,6 +73,7 @@ int main() {
 				cout << "===> "; cin >> input_raw;
 			}
 		}
+
 		// Get amount (oz) from user.
 		cout << "Number of ounces (9-18): "; cin >> drink_size;
 		while (drink_bool != true) {
@@ -91,6 +97,7 @@ int main() {
 				cout << "Number of ounces (9-18): "; cin >> drink_size;
 			}
 		}
+
 		// Calculate subtotal, tax amount and total price.
 		if (input_usable == 'C')
 			subtotal = price_coffee * drink_size;
@@ -100,9 +107,11 @@ int main() {
 			subtotal = price_mocha * drink_size;
 		total_tax = subtotal * tax_rate;
 		total_price = round((subtotal + total_tax) * 100) / 100;
+
 		// Display total price and ask for user to pay.
 		cout << "Total Price:       $ " << total_price << endl;
 		cout << "Enter amount paid: $ "; cin >> amount_paid;
+
 		// Payment input verification.
 		while (payment_bool != true) {
 			if (total_price > amount_paid) {
@@ -112,6 +121,7 @@ int main() {
 			else
 				payment_bool = true;
 		}
+
 		// Print the change and thank user for purchase.
 		change = amount_paid - total_price;
 		cout << "Your change $ " << change << " falls out of the machine on the floor." << endl;
@@ -127,6 +137,7 @@ int main() {
 			cout << "Thank you! Your Mocha will now be brewed!" << endl;
 			total_mocha += subtotal;
 		}
+
 		// Display the brewing happening.
 		Sleep(sleepMSecs);
 		cout << endl << "A cup drops out of the machine below the Mocha spigot." << endl;
@@ -139,8 +150,10 @@ int main() {
 			cout << " " << drink_size << " ounces dispenced..." << endl;
 			Sleep(sleepMSecs);
 		}
+
 		// Make sure all numbers have two digits after the decimal.
 		cout << setprecision(2) << fixed;
+
 		// Display receipt.
 		if (input_usable == 'C') {
 			cout << endl << "Your Coffee is ready! Here is your receipt!" << endl;
@@ -165,12 +178,16 @@ int main() {
 		cout << "Total:        $ " << total_price << endl;
 		cout << "Amount Paid:  $ " << amount_paid << endl;
 		cout << "Change:       $ " << change << endl;
+
 		// Add 1 to drinks sold per interation of the while loop.
 		drinks_sold++;
+
 		// Re-run program.
 		system("pause");
 		cout << endl << endl;
+
 	}
+
 	// Shutdown report.
 	cout << endl << "SHUTDOWN: Totals sold: " << drinks_sold << endl;
 	cout << "BEVERAGE  OUNCES  TOTAL SOLD  LEFT IN TANK" << endl;
@@ -179,6 +196,7 @@ int main() {
 	cout << "Latte         " << ounces_bought_latte <<  "   $    " << total_latte << "               " << tank_latte << endl;
 	cout << "Mocha         " << ounces_bought_mocha <<  "   $    " << total_mocha << "               " << tank_mocha << endl;
 	cout << "TOTAL         " << "    $" << total_coffee + total_latte + total_mocha << endl;
+
 	// Ending statements.
 	system("pause");
 	return 0;

@@ -147,11 +147,11 @@ int main() {
 			cout << endl << "A cup drops out of the machine below the Mocha spigot." << endl;
 			Sleep(sleepMSecs);
 			for (int i = 3; i <= drink_size; i += 3) {
-				cout << " " << i << " ounces dispenced..." << endl;
+				cout << setw(2) << i << " ounces dispenced..." << endl;
 				Sleep(sleepMSecs);
 			}
 			if ((drink_size % 3) != 0) {
-				cout << " " << drink_size << " ounces dispenced..." << endl;
+				cout << setw(2) << drink_size << " ounces dispenced..." << endl;
 				Sleep(sleepMSecs);
 			}
 

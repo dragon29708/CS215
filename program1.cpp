@@ -122,6 +122,9 @@ int main() {
 				payment_bool = true;
 		}
 
+		// Make sure all numbers have two digits after the decimal.
+		cout << setprecision(2) << fixed;
+
 		// Print the change and thank user for purchase.
 		change = amount_paid - total_price;
 		cout << "Your change $ " << change << " falls out of the machine on the floor." << endl;
@@ -150,9 +153,6 @@ int main() {
 			cout << " " << drink_size << " ounces dispenced..." << endl;
 			Sleep(sleepMSecs);
 		}
-
-		// Make sure all numbers have two digits after the decimal.
-		cout << setprecision(2) << fixed;
 
 		// Display receipt.
 		if (input_usable == 'C') {

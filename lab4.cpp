@@ -10,6 +10,7 @@ writing to files.
 */
 
 #include<iostream>
+#include<iomanip>
 #include<fstream>
 #include<string>
 
@@ -59,10 +60,11 @@ int main() {
     fout << "       Student       Exam  Proj  Attn  Overall\n";
     fout << "-------------------- ----- ----- ----- -----  \n";
 
+    // Get number of students and number of class days.
+    fin >> numStudents >> numClassDays;
+
     // Ouput a report line per student.
-    for (int i =0; i < numStudents; i++) {
-        // Get number of students and number of class days.
-        fin >> numStudents >> numClassDays;
+    for (int i = 0; i < numStudents; i++) {
 
         // Loop over the readFile and get first, last, scores, etc.
         fin >> firstName >> lastName >> exam1 >> exam2;
@@ -72,7 +74,7 @@ int main() {
         examAvg = ((exam1 + exam2) / numExams) * 100;
         projAvg = ((proj1 + proj2 + proj3) / numProjs) * 100;
         attdAvg = ((numClassDays - absentCount) / static_cast<float>(numClassDays)) * 100;
-        ovrlAvg = (examAvg * examWeight + projAvg * projWeight + attdAvg * attdWeigt) * 100; 
+        ovrlAvg = (examAvg * examWeight + projAvg * projWeight + attdAvg * attdWeigt) * 100;
 
         // Write report per student.
         fout << setw(20) << lastName << ", " << firstName;
@@ -83,8 +85,8 @@ int main() {
     fout << "----------------------------------------------";
 
     // Close readFile and writeFile.
-    fin.close()
-    fout.close()
+    fin.close();
+    fout.close();
 
     // Output to user where report text has been saved to.
     cout << "Grade report written to: " << writeFile;

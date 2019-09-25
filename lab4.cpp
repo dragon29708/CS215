@@ -17,8 +17,8 @@ using namespace std;
 
 int main() {
     // Intialize variables.
-    string readFile;
-    bool fileBool;
+    string readFile, writeFile;
+    bool fileBool = false;
 
     // Build my read file object for reading a file.
     ifstream fin;
@@ -26,34 +26,30 @@ int main() {
     // Get input and file from user.
     cout << "Enter input file name: "; cin >> readFile;
 
-    // If readFile will not open.
-    while (fileBool != true) {
-        if (fin.fail(readFile)) {
-            // File cannot be opened. Program exits.
-            cout << "Unable to open file " << readFile;
-            system("Pause");
-            return 0;
-        }
-        else
-            fileBool = true;
+    // Open the file for reading.
+    fin.open(readFile);
+
+    // If the file doesn't exist, unable to open or in wrong repo, then exit program.
+    if (fin.fail()) {
+        // File cannot be opened. Program exits.
+        cout << "Unable to open file " << readFile << endl;
+        system("Pause");
+        return 0;
     }
 
-    // Get output file from user.
+    // If the file can be opened and read from, get the output file from user for report.
+    cout << "Enter output file name: "; cin >> writeFile;
 
-    // If file opens, read contents of selected files into variables.
+    // Cin and store data from readFile.
 
-
-        // Compute averages and any info neccesary for report.
-
-
-        // Generate and write report to user specified text file.
+    // Compute averages and any info neccesary for report.
 
 
-        // Output to user where report text has been saved to.
+    // Generate and write report to user specified text file.
 
 
-    // Else ouput to user that file cannot be opened.
-
+    // Output to user where report text has been saved to.
+    cout << "Grade report written to: " << writeFile;
 
     // End statements.
     system("Pause");

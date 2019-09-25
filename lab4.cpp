@@ -40,7 +40,8 @@ int main() {
     // If the file can be opened and read from, get the output file from user for report.
     cout << "Enter output file name: "; cin >> writeFile;
 
-    // Cin and store data from readFile.
+    // Retrieve and store data from readFile.
+
 
     // Compute averages and any info neccesary for report.
 

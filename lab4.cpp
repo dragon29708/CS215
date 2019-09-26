@@ -89,7 +89,7 @@ int main() {
     fout.close();
 
     // Output to user where report text has been saved to.
-    cout << "Grade report written to: " << writeFile;
+    cout << "Grade report written to: " << writeFile << endl;
 
     // End statements.
     system("Pause");

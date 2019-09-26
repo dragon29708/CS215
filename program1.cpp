@@ -193,10 +193,20 @@ int main() {
 	cout << endl << "SHUTDOWN: Totals sold: " << drinks_sold << endl;
 	cout << "BEVERAGE  OUNCES  TOTAL SOLD  LEFT IN TANK" << endl;
 	cout << "--------  ------  ----------  ------------" << endl;
-	cout << "Coffee" << ounces_bought_coffee << "   $    " << total_coffee << "               " << tank_coffee << endl;
-	cout << "Latte" << ounces_bought_latte << "   $    " << total_latte << "               " << tank_latte << endl;
-	cout << "Mocha" << ounces_bought_mocha << "   $    " << total_mocha << "               " << tank_mocha << endl;
-	cout << "TOTAL" << "    $" << total_coffee + total_latte + total_mocha << endl;
+	cout << setw(8) << left << "Coffee" << "  ";
+	cout << setw(6) << right << ounces_bought_coffee;
+	cout << "  $" << setw(8) << right << total_coffee;
+	cout << setw(7) << " " << setw(3) << tank_coffee << endl;
+	cout << setw(8) << left << "Latte" << "  ";
+	cout << setw(6) << right << ounces_bought_latte;
+	cout << "  $" << setw(8) << right << total_latte;
+	cout << setw(7) << " " << setw(3) << tank_latte << endl;
+	cout << setw(8) << left << "Mocha" << "  ";
+	cout << setw(6) << right << ounces_bought_mocha;
+	cout << "  $" << setw(8) << right << total_mocha;
+	cout << setw(7) << " " << setw(3) << tank_mocha << endl;
+	cout << setw(8) << left << "TOTAL" << "  ";
+	cout << setw(9) << right << "$" << setw(8) << right << total_coffee + total_latte + total_mocha << endl;
 
 	// Ending statements.
 	system("pause");

@@ -20,7 +20,7 @@ int main() {
 	// Declaring variables.
 	const double price_coffee = 0.15, price_latte = 0.25, price_mocha = 0.30, tax_rate = 0.06;
 	const int sleepMSecs = 2000;
-	int tank_coffee = 18, tank_latte = 18, tank_mocha = 18, drinks_sold = 0, drink_size;
+	int tank_coffee = 18, tank_latte = 18, tank_mocha = 18, drink_size;
 	int ounces_bought_coffee = 0, ounces_bought_latte = 0, ounces_bought_mocha = 0;
 	string input_raw = "";
 	char input_usable = ' ';
@@ -180,9 +180,6 @@ int main() {
 			cout << "Amount Paid:  $ " << amount_paid << endl;
 			cout << "Change:       $ " << change << endl;
 
-			// Add 1 to drinks sold per interation of the while loop.
-			drinks_sold++;
-
 			// Re-run program.
 			system("pause");
 			cout << endl << endl;
@@ -190,7 +187,7 @@ int main() {
 	}
 
 	// Shutdown report.
-	cout << endl << "SHUTDOWN: Totals sold: " << drinks_sold << endl;
+	cout << endl << "SHUTDOWN: Totals sold: " << endl;
 	cout << "BEVERAGE  OUNCES  TOTAL SOLD  LEFT IN TANK" << endl;
 	cout << "--------  ------  ----------  ------------" << endl;
 	cout << setw(8) << left << "Coffee" << "  ";

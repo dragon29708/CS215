@@ -16,6 +16,9 @@ writing to files.
 
 using namespace std;
 
+// Assignment weights for overall grade calculation.
+const float examWeight = 0.50, projWeight = 0.30, attdWeigt = 0.20;
+
 int main() {
     // Read and write files.
     string readFile, writeFile;
@@ -28,8 +31,6 @@ int main() {
     int exam1, exam2, proj1, proj2, proj3, absentCount;
     // Average scores per student for grade report.
     float examAvg, projAvg, attdAvg, ovrlAvg;
-    // Assignment weights for overall grade calculation.
-    const float examWeight = 0.50, projWeight = 0.30, attdWeigt = 0.20;
 
     // Build my read file object for reading a file.
     ifstream fin;

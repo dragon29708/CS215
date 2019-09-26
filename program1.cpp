@@ -193,10 +193,10 @@ int main() {
 	cout << endl << "SHUTDOWN: Totals sold: " << drinks_sold << endl;
 	cout << "BEVERAGE  OUNCES  TOTAL SOLD  LEFT IN TANK" << endl;
 	cout << "--------  ------  ----------  ------------" << endl;
-	cout << "Coffee        " << ounces_bought_coffee << "   $    " << total_coffee << "               " << tank_coffee << endl;
-	cout << "Latte         " << ounces_bought_latte << "   $    " << total_latte << "               " << tank_latte << endl;
-	cout << "Mocha         " << ounces_bought_mocha << "   $    " << total_mocha << "               " << tank_mocha << endl;
-	cout << "TOTAL         " << "    $" << total_coffee + total_latte + total_mocha << endl;
+	cout << "Coffee" << ounces_bought_coffee << "   $    " << total_coffee << "               " << tank_coffee << endl;
+	cout << "Latte" << ounces_bought_latte << "   $    " << total_latte << "               " << tank_latte << endl;
+	cout << "Mocha" << ounces_bought_mocha << "   $    " << total_mocha << "               " << tank_mocha << endl;
+	cout << "TOTAL" << "    $" << total_coffee + total_latte + total_mocha << endl;
 
 	// Ending statements.
 	system("pause");

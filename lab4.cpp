@@ -35,7 +35,7 @@ int main() {
     ifstream fin;
 
     // Get input and file from user.
-    cout << "Enter input file name: "; cin >> readFile;
+    cout << "Enter input file name:   "; cin >> readFile;
 
     // Open the file for reading.
     fin.open(readFile);
@@ -43,13 +43,13 @@ int main() {
     // If the file doesn't exist, unable to open or in wrong repo, then exit program.
     if (fin.fail()) {
         // File cannot be opened. Program exits.
-        cout << "Unable to open file " << readFile << endl;
+        cout << "Unable to open file    " << readFile << endl;
         system("Pause");
         return 0;
     }
 
     // If the file can be opened and read from, get the output file from user for report.
-    cout << "Enter output file name: "; cin >> writeFile;
+    cout << "Enter output file name:  "; cin >> writeFile;
 
     // Generate and write report to user specified text file.
     ofstream fout;
@@ -71,16 +71,20 @@ int main() {
         fin >> proj1 >> proj2 >> proj3 >> absentCount;
 
         // Compute averages and any info neccesary for report.
-        examAvg = ((exam1 + exam2) / numExams) * 100;
-        projAvg = ((proj1 + proj2 + proj3) / numProjs) * 100;
+        examAvg = (exam1 + exam2) / numExams;
+        projAvg = (proj1 + proj2 + proj3) / numProjs;
         attdAvg = ((numClassDays - absentCount) / static_cast<float>(numClassDays)) * 100;
-        ovrlAvg = (examAvg * examWeight + projAvg * projWeight + attdAvg * attdWeigt) * 100;
+        ovrlAvg = examAvg * examWeight + projAvg * projWeight + attdAvg * attdWeigt;
 
         // Write report per student.
-        fout << setw(20) << lastName << ", " << firstName;
-        fout << setw(5) << examAvg << projAvg << attdAvg << ovrlAvg << "\n";
+        fout << setprecision(1) << fixed;
+        fout << setw(20) << left << lastName + ", " + firstName << " ";
+        fout << setw(5) << right << examAvg << " ";
+        fout << setw(5) << right << projAvg << " ";
+        fout << setw(5) << right << attdAvg << " ";
+        fout << setw(5) << right << ovrlAvg << "\n";
     }
- 
+
     // Last line for looks.
     fout << "----------------------------------------------";
 

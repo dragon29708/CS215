@@ -5,6 +5,7 @@
 Author: Andrew Cassidy
 Date: 9/17/2019
 Description: A program that simulates a coffee machine.
+Assistance: I received help from no one.
 --------------------------------------------------------------------
 */
 

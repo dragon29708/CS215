@@ -16,15 +16,25 @@ Description: A program that simulates a coffee machine.
 
 using namespace std;
 
+// Global constants.
+const double coffeePrice = 0.15, lattePrice = 0.25, mochaPrice = 0.30, taxRate = 0.06;
+const int sleepMSecs = 2000;
+
 int main() {
-	// Declaring variables.
-	const double price_coffee = 0.15, price_latte = 0.25, price_mocha = 0.30, tax_rate = 0.06;
-	const int sleepMSecs = 2000;
-	int tank_coffee = 18, tank_latte = 18, tank_mocha = 18, drink_size;
-	int ounces_bought_coffee = 0, ounces_bought_latte = 0, ounces_bought_mocha = 0;
-	string input_raw = "";
-	char input_usable = ' ';
-	double total_price, amount_paid, total_tax, subtotal, change, total_coffee = 0.0, total_latte = 0.0, total_mocha = 0.0;
+	// Tank size variables per drink type
+	int coffeeTank = 18, latteTank = 18, mochaTank = 18;
+	// Size of drink user inputs.
+	int drink_size;
+	// Ounces of drink type bought.
+	int ozBoughtCoffee = 0, ozBoughtLatte = 0, ozBoughtMocha = 0;
+	// Choice user inputs for drink.
+	string drinkChoice = "";
+	// Char taken from first char in drinkChoice. Used for knowing which drink user wants.
+	char drinkChoiceChar = ' ';
+	// Variables used for money, receipt, etc.
+	double totalPrice, amountPaid, totalTax, subtotal, change;
+	// Total amount of drink type sold.
+	double coffeeSold = 0.0, latteSold = 0.0, mochaSold = 0.0;
 
 	// Print out logo.
 	cout << "+----------------------------------+\n";
@@ -34,63 +44,63 @@ int main() {
 
 	// Start up menu for mantenance worker.
 	cout << "STARTUP: Enter tank levels" << endl;
-	cout << setw(10) << "Coffee Tank: "; cin >> tank_coffee;
-	cout << setw(10) << "Latte Tank:  "; cin >> tank_latte;
-	cout << setw(10) << "Mocha Tank:  "; cin >> tank_mocha;
+	cout << setw(10) << "Coffee Tank: "; cin >> coffeeTank;
+	cout << setw(10) << "Latte Tank:  "; cin >> latteTank;
+	cout << setw(10) << "Mocha Tank:  "; cin >> mochaTank;
 	cout << endl;
 
 	// While the escape char isn't inputted.
-	while (input_usable != '!') {
+	while (drinkChoiceChar != '!') {
 
 		// Bool variables that need to be re-initialized each interation of while loop.
 		bool input_bool = false, drink_bool = false, payment_bool = false;
 		// Print out menu.
-		if ((tank_coffee < 18) && (tank_latte < 18) && (tank_mocha))
+		if ((coffeeTank < 18) && (latteTank < 18) && (mochaTank))
 			cout << "ALL DRINK TANKS EMPTY. PLEASE REFILL!" << endl;
 		else
 			cout << "PLEASE SELECT YOUR BEVERAGE!" << endl;
-		if (tank_coffee >= 18)
+		if (coffeeTank >= 18)
 			cout << "C. Coffee   $ 0.15 per oz." << endl;
-		if (tank_latte >= 18)
+		if (latteTank >= 18)
 			cout << "L. Latte    $ 0.25 per oz." << endl;
-		if (tank_mocha >= 18)
+		if (mochaTank >= 18)
 			cout << "M. Mocha    $ 0.30 per oz." << endl;
 
 		// Get drink from user.
-		cout << "===> "; cin >> input_raw;
+		cout << "===> "; cin >> drinkChoice;
 		while (input_bool != true) {
-			input_usable = toupper(input_raw[0]);
-			if ((input_usable == 'C') && (tank_coffee >= 18))
+			drinkChoiceChar = toupper(drinkChoice[0]);
+			if ((drinkChoiceChar == 'C') && (coffeeTank >= 18))
 				input_bool = true;
-			else if ((input_usable == 'L') && (tank_latte >= 18))
+			else if ((drinkChoiceChar == 'L') && (latteTank >= 18))
 				input_bool = true;
-			else if ((input_usable == 'M') && (tank_mocha >= 18))
+			else if ((drinkChoiceChar == 'M') && (mochaTank >= 18))
 				input_bool = true;
-			else if (input_usable == '!')
+			else if (drinkChoiceChar == '!')
 				input_bool = true;
 			else {
 				cout << "Invalid selection! Try again!" << endl;
-				cout << "===> "; cin >> input_raw;
+				cout << "===> "; cin >> drinkChoice;
 			}
 		}
 
-		if (input_usable != '!') {
+		if (drinkChoiceChar != '!') {
 			// Get amount (oz) from user.
 			cout << "Number of ounces (9-18): "; cin >> drink_size;
 			while (drink_bool != true) {
 				if ((drink_size >= 9) && (drink_size <= 18)) {
 					drink_bool = true;
-					if (input_usable == 'C') {
-						tank_coffee -= drink_size;
-						ounces_bought_coffee += drink_size;
+					if (drinkChoiceChar == 'C') {
+						coffeeTank -= drink_size;
+						ozBoughtCoffee += drink_size;
 					}
-					else if (input_usable == 'L') {
-						tank_latte -= drink_size;
-						ounces_bought_latte += drink_size;
+					else if (drinkChoiceChar == 'L') {
+						latteTank -= drink_size;
+						ozBoughtLatte += drink_size;
 					}
 					else {
-						tank_mocha -= drink_size;
-						ounces_bought_mocha += drink_size;
+						mochaTank -= drink_size;
+						ozBoughtMocha += drink_size;
 					}
 				}
 				else {
@@ -100,24 +110,24 @@ int main() {
 			}
 
 			// Calculate subtotal, tax amount and total price.
-			if (input_usable == 'C')
-				subtotal = price_coffee * drink_size;
-			else if (input_usable == 'L')
-				subtotal = price_latte * drink_size;
+			if (drinkChoiceChar == 'C')
+				subtotal = coffeePrice * drink_size;
+			else if (drinkChoiceChar == 'L')
+				subtotal = lattePrice * drink_size;
 			else
-				subtotal = price_mocha * drink_size;
-			total_tax = subtotal * tax_rate;
-			total_price = round((subtotal + total_tax) * 100) / 100;
+				subtotal = mochaPrice * drink_size;
+			totalTax = subtotal * taxRate;
+			totalPrice = round((subtotal + totalTax) * 100) / 100;
 
 			// Display total price and ask for user to pay.
-			cout << "Total Price:       $ " << total_price << endl;
-			cout << "Enter amount paid: $ "; cin >> amount_paid;
+			cout << "Total Price:       $ " << setprecision(2) << fixed << totalPrice << endl;
+			cout << "Enter amount paid: $ "; cin >> amountPaid;
 
 			// Payment input verification.
 			while (payment_bool != true) {
-				if (total_price > amount_paid) {
+				if (totalPrice > amountPaid) {
 					cout << "That is not enough! Please try again." << endl;
-					cout << "Enter amount paid: $ "; cin >> amount_paid;
+					cout << "Enter amount paid: $ "; cin >> amountPaid;
 				}
 				else
 					payment_bool = true;
@@ -127,19 +137,19 @@ int main() {
 			cout << setprecision(2) << fixed;
 
 			// Print the change and thank user for purchase.
-			change = amount_paid - total_price;
+			change = amountPaid - totalPrice;
 			cout << "Your change $ " << change << " falls out of the machine on the floor." << endl;
-			if (input_usable == 'C') {
+			if (drinkChoiceChar == 'C') {
 				cout << "Thank you! Your Coffee will now be brewed!" << endl;
-				total_coffee += subtotal;
+				coffeeSold += subtotal;
 			}
-			else if (input_usable == 'L') {
+			else if (drinkChoiceChar == 'L') {
 				cout << "Thank you! Your Latte will now be brewed!" << endl;
-				total_latte += subtotal;
+				latteSold += subtotal;
 			}
 			else {
 				cout << "Thank you! Your Mocha will now be brewed!" << endl;
-				total_mocha += subtotal;
+				mochaSold += subtotal;
 			}
 
 			// Display the brewing happening.
@@ -156,28 +166,28 @@ int main() {
 			}
 
 			// Display receipt.
-			if (input_usable == 'C') {
+			if (drinkChoiceChar == 'C') {
 				cout << endl << "Your Coffee is ready! Here is your receipt!" << endl;
 				cout << "Beverage:       Coffee" << endl;
 				cout << "Ounces:         " << drink_size << endl;
-				cout << "Price per Oz: $ " << price_coffee << endl;
+				cout << "Price per Oz: $ " << coffeePrice << endl;
 			}
-			else if (input_usable == 'L') {
+			else if (drinkChoiceChar == 'L') {
 				cout << endl << "Your Latte is ready! Here is your receipt!" << endl;
 				cout << "Beverage:       Latte" << endl;
 				cout << "Ounces:         " << drink_size << endl;
-				cout << "Price per Oz: $ " << price_latte << endl;
+				cout << "Price per Oz: $ " << lattePrice << endl;
 			}
 			else {
 				cout << endl << "Your Mocha is ready! Here is your receipt!" << endl;
 				cout << "Beverage:       Mocha" << endl;
 				cout << "Ounces:         " << drink_size << endl;
-				cout << "Price per Oz: $ " << price_mocha << endl;
+				cout << "Price per Oz: $ " << mochaPrice << endl;
 			}
 			cout << "Sub Total:    $ " << subtotal << endl;
-			cout << "Tax:          $ " << total_tax << endl;
-			cout << "Total:        $ " << total_price << endl;
-			cout << "Amount Paid:  $ " << amount_paid << endl;
+			cout << "Tax:          $ " << totalTax << endl;
+			cout << "Total:        $ " << totalPrice << endl;
+			cout << "Amount Paid:  $ " << amountPaid << endl;
 			cout << "Change:       $ " << change << endl;
 
 			// Re-run program.
@@ -191,19 +201,19 @@ int main() {
 	cout << "BEVERAGE  OUNCES  TOTAL SOLD  LEFT IN TANK" << endl;
 	cout << "--------  ------  ----------  ------------" << endl;
 	cout << setw(8) << left << "Coffee" << "  ";
-	cout << setw(6) << right << ounces_bought_coffee;
-	cout << "  $" << setw(8) << right << total_coffee;
-	cout << setw(7) << " " << setw(3) << tank_coffee << endl;
+	cout << setw(6) << right << ozBoughtCoffee;
+	cout << "  $" << setw(8) << right << coffeeSold;
+	cout << setw(7) << " " << setw(3) << coffeeTank << endl;
 	cout << setw(8) << left << "Latte" << "  ";
-	cout << setw(6) << right << ounces_bought_latte;
-	cout << "  $" << setw(8) << right << total_latte;
-	cout << setw(7) << " " << setw(3) << tank_latte << endl;
+	cout << setw(6) << right << ozBoughtLatte;
+	cout << "  $" << setw(8) << right << latteSold;
+	cout << setw(7) << " " << setw(3) << latteTank << endl;
 	cout << setw(8) << left << "Mocha" << "  ";
-	cout << setw(6) << right << ounces_bought_mocha;
-	cout << "  $" << setw(8) << right << total_mocha;
-	cout << setw(7) << " " << setw(3) << tank_mocha << endl;
+	cout << setw(6) << right << ozBoughtMocha;
+	cout << "  $" << setw(8) << right << mochaSold;
+	cout << setw(7) << " " << setw(3) << mochaTank << endl;
 	cout << setw(8) << left << "TOTAL" << "  ";
-	cout << setw(9) << right << "$" << setw(8) << right << total_coffee + total_latte + total_mocha << endl;
+	cout << setw(9) << right << "$" << setw(8) << right << coffeeSold + latteSold + mochaSold << endl;
 
 	// Ending statements.
 	system("pause");

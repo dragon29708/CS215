@@ -25,7 +25,7 @@ int main() {
 	// Tank size variables per drink type
 	int coffeeTank = 18, latteTank = 18, mochaTank = 18;
 	// Size of drink user inputs.
-	int drink_size;
+	int drinkSize;
 	// Ounces of drink type bought.
 	int ozBoughtCoffee = 0, ozBoughtLatte = 0, ozBoughtMocha = 0;
 	// Choice user inputs for drink.
@@ -87,36 +87,36 @@ int main() {
 
 		if (drinkChoiceChar != '!') {
 			// Get amount (oz) from user.
-			cout << "Number of ounces (9-18): "; cin >> drink_size;
+			cout << "Number of ounces (9-18): "; cin >> drinkSize;
 			while (drink_bool != true) {
-				if ((drink_size >= 9) && (drink_size <= 18)) {
+				if ((drinkSize >= 9) && (drinkSize <= 18)) {
 					drink_bool = true;
 					if (drinkChoiceChar == 'C') {
-						coffeeTank -= drink_size;
-						ozBoughtCoffee += drink_size;
+						coffeeTank -= drinkSize;
+						ozBoughtCoffee += drinkSize;
 					}
 					else if (drinkChoiceChar == 'L') {
-						latteTank -= drink_size;
-						ozBoughtLatte += drink_size;
+						latteTank -= drinkSize;
+						ozBoughtLatte += drinkSize;
 					}
 					else {
-						mochaTank -= drink_size;
-						ozBoughtMocha += drink_size;
+						mochaTank -= drinkSize;
+						ozBoughtMocha += drinkSize;
 					}
 				}
 				else {
 					cout << "Invalid entry!" << endl;
-					cout << "Number of ounces (9-18): "; cin >> drink_size;
+					cout << "Number of ounces (9-18): "; cin >> drinkSize;
 				}
 			}
 
 			// Calculate subtotal, tax amount and total price.
 			if (drinkChoiceChar == 'C')
-				subtotal = coffeePrice * drink_size;
+				subtotal = coffeePrice * drinkSize;
 			else if (drinkChoiceChar == 'L')
-				subtotal = lattePrice * drink_size;
+				subtotal = lattePrice * drinkSize;
 			else
-				subtotal = mochaPrice * drink_size;
+				subtotal = mochaPrice * drinkSize;
 			totalTax = subtotal * taxRate;
 			totalPrice = round((subtotal + totalTax) * 100) / 100;
 
@@ -157,12 +157,12 @@ int main() {
 			Sleep(sleepMSecs);
 			cout << endl << "A cup drops out of the machine below the Mocha spigot." << endl;
 			Sleep(sleepMSecs);
-			for (int i = 3; i <= drink_size; i += 3) {
+			for (int i = 3; i <= drinkSize; i += 3) {
 				cout << setw(2) << i << " ounces dispenced..." << endl;
 				Sleep(sleepMSecs);
 			}
-			if ((drink_size % 3) != 0) {
-				cout << setw(2) << drink_size << " ounces dispenced..." << endl;
+			if ((drinkSize % 3) != 0) {
+				cout << setw(2) << drinkSize << " ounces dispenced..." << endl;
 				Sleep(sleepMSecs);
 			}
 
@@ -170,19 +170,19 @@ int main() {
 			if (drinkChoiceChar == 'C') {
 				cout << endl << "Your Coffee is ready! Here is your receipt!" << endl;
 				cout << "Beverage:       Coffee" << endl;
-				cout << "Ounces:         " << drink_size << endl;
+				cout << "Ounces:         " << drinkSize << endl;
 				cout << "Price per Oz: $ " << coffeePrice << endl;
 			}
 			else if (drinkChoiceChar == 'L') {
 				cout << endl << "Your Latte is ready! Here is your receipt!" << endl;
 				cout << "Beverage:       Latte" << endl;
-				cout << "Ounces:         " << drink_size << endl;
+				cout << "Ounces:         " << drinkSize << endl;
 				cout << "Price per Oz: $ " << lattePrice << endl;
 			}
 			else {
 				cout << endl << "Your Mocha is ready! Here is your receipt!" << endl;
 				cout << "Beverage:       Mocha" << endl;
-				cout << "Ounces:         " << drink_size << endl;
+				cout << "Ounces:         " << drinkSize << endl;
 				cout << "Price per Oz: $ " << mochaPrice << endl;
 			}
 			cout << "Sub Total:    $ " << subtotal << endl;

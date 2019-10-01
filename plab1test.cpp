@@ -39,6 +39,8 @@ int main() {
             else if (stateInput == "IN") cout << "Indiana" << endl;
             else if (stateInput == "TN") cout << "Tennessee" << endl;
             else cout << "West Virginia" << endl;
+            // Get out of while loop.
+            validInput = true;
         }
     }
 

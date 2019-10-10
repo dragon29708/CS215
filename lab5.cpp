@@ -71,7 +71,7 @@ int main() {
 
     input = toupper(input[0]);
 
-    if ((input == 'A') || (input == 'E') || (input == 'X'));
+    if ((input == "A") || (input == "E") || (input == "X"));
     else {
         cout << "Invalid entry! Try again!\n";
         cout << "Enter A, E or X: "; cin >> input;

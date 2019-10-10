@@ -3,7 +3,7 @@
                          CS215-401 Lab 5
 --------------------------------------------------------------------
 Author: Andrew Cassidy
-Date: 9/17/2019
+Date: 10/10/2019
 Description: Friends list app.
 --------------------------------------------------------------------
 */
@@ -24,28 +24,25 @@ struct afriend {
 };
 
 int main() {
-    afriend list[MAX_FRIENDS];
+    // Variables.
     int numFriends;
-    string friendFile;
     string input;
+    int editNum;
+
+    // Create list of objects of type afriend.
+    afriend list[MAX_FRIENDS];
 
     // Build my read file object for reading a file.
     ifstream fin;
-
-    cout << "Enter input file name: "; cin >> friendFile;
-
-    fin.open(friendFile);
-
+    fin.open("friends.txt");
     // Exit app if file doesn't open.
     if (fin.fail()) {
         // File cannot be opened. Program exits.
-        cout << "Unable to open file " << friendFile << endl;
         system("Pause");
         return 0;
     }
 
     fin >> numFriends;
-
     // Populate list w/ contents of file.
     for (int i = 0; i < numFriends; i++) {
         fin >> list[i].name;
@@ -65,13 +62,51 @@ int main() {
         cout << endl;
     }
     cout << "\n---------------------------------------------------\n";
-
     cout << "Options: A=Add  E=Edit  X=Exit\n";
     cout << "Enter A, E or X: "; cin >> input;
 
-    input = toupper(input[0]);
 
-    if ((input == "A") || (input == "E") || (input == "X"));
+    input = toupper(input[0]);
+    if ((input == "A") || (input == "E") || (input == "X")) {
+        // Add.
+        if ((input == "A") && (numFriends < MAX_FRIENDS)) {
+            cout << "Enter name: ";
+            cin >> list[numFriends].name;
+            cout << "Enter phone: ";
+            cin >> list[numFriends].phone;
+            cout << "Enter email: ";
+            cin >> list[numFriends].email;
+            numFriends++;
+        }
+        // Edit.
+        else if (input == "E") {
+            // Get index to change.
+            cout << "Enter Num of friend to edit (0-" << numFriends - 1 << "):";
+            cin >> editNum;
+            while ((editNum >= numFriends) || (editNum < 0)) {
+                cout << "Invalid entry! Try again!" << endl;
+                cout << "Enter Num of friend to edit (0-" << numFriends - 1 << "):";
+                cin >> editNum;
+            }
+            // Get name, phone, email.
+            cout << "Enter new name: ";
+            cin >> list[editNum].name;
+            cout << "Enter new phone: ";
+            cin >> list[editNum].phone;
+            cout << "Enter new email: ";
+            cin >> list[editNum].email;
+        }
+        // Exit
+        else if (input == "X") {
+            cout << "Thanks for using Friender!" << endl;
+            system("pause");
+            return 0;
+        }
+        // Friend list full.
+        else {
+            cout << "Sorry, friend list is full.\n" << endl;
+        }
+    }
     else {
         cout << "Invalid entry! Try again!\n";
         cout << "Enter A, E or X: "; cin >> input;

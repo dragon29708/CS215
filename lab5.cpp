@@ -27,6 +27,7 @@ int main() {
     afriend list[MAX_FRIENDS];
     int numFriends;
     string friendFile;
+    string input;
 
     // Build my read file object for reading a file.
     ifstream fin;
@@ -53,7 +54,6 @@ int main() {
     }
 
     // Menu.
-
     cout << "--------------------- Friend List -----------------\n";
     cout << "Num Name            Phone        Email             \n";
     cout << "--- --------------- ------------ ------------------\n";
@@ -65,6 +65,18 @@ int main() {
         cout << endl;
     }
     cout << "\n---------------------------------------------------\n";
+
+    cout << "Options: A=Add  E=Edit  X=Exit\n";
+    cout << "Enter A, E or X: "; cin >> input;
+
+    input = toupper(input[0]);
+
+    if ((input == 'A') || (input == 'E') || (input == 'X'));
+    else {
+        cout << "Invalid entry! Try again!\n";
+        cout << "Enter A, E or X: "; cin >> input;
+        input = toupper(input[0]);
+    }
 
     fin.close();
 

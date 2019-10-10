@@ -52,7 +52,19 @@ int main() {
         fin >> list[i].email;
     }
 
+    // Menu.
 
+    cout << "--------------------- Friend List -----------------\n";
+    cout << "Num Name            Phone        Email             \n";
+    cout << "--- --------------- ------------ ------------------\n";
+    for (int j = 0; j < numFriends; j++) {
+        cout << setw(3) << right << j << " ";
+        cout << setw(15) << left << list[j].name << " ";
+        cout << setw(12) << list[j].phone << " ";
+        cout << setw(18) << left << list[j].email;
+        cout << endl;
+    }
+    cout << "\n---------------------------------------------------\n";
 
     fin.close();
 

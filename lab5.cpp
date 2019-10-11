@@ -23,7 +23,9 @@ struct afriend {
     string email;
 };
 
+
 int main() {
+
     // Variables.
     int numFriends;
     string input;

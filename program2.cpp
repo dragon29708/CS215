@@ -69,7 +69,6 @@ void readInventory(item inv[], int & numberOfInvItems, int & lastOrderNum) {
 // Max amount of items in inventory.
 const int MAX_INV_ITEMS = 10;
 
-// readInventory
 // getMainOption
 // isValidOption
 // displayInventory

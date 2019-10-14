@@ -14,7 +14,9 @@ from an inventory of products.
 #include<iomanip>
 #include<fstream>
 
-const int READ_ERROR    = -1;
+using namespace std;
+
+const int READ_ERROR = -1;
 const int MAX_INV_ITEMS = 10;
 
 // describes a single item in the inventory, and on an order
@@ -29,21 +31,22 @@ const int MAX_ORDERS = 10;
 // describes a customer order or "basket"
 const int MAX_ORDER_ITEMS = 5;
 struct order {
-    long   orderNumber;     // unique order number for this order
-    string custName;        // customer name
-    double totalPrice;      // price of all items purchased
+    long   orderNumber;             // unique order number for this order
+    string custName;                // customer name
+    double totalPrice;              // price of all items purchased
     item items[MAX_ORDER_ITEMS];    // list of items purchased
-    int numItems;           // number of items purchased
+    int numItems;                   // number of items purchased
 };
 
+
 //----------------------------------------------------------------------------
-//                                  readInventory
+//                             readInventory
 //----------------------------------------------------------------------------
 // Modifies: inventory list (sets numberOfItems to -1 on READ ERROR)
 //           lastOrderNum
 // Reads inventory data from a file into an array of inventory items
 //----------------------------------------------------------------------------
-void readInventory(item inv[], int & numberOfInvItems, int & lastOrderNum) {
+void readInventory(item inv[], int& numberOfInvItems, int& lastOrderNum) {
     ifstream f;
 
     // open the inventory file
@@ -66,24 +69,124 @@ void readInventory(item inv[], int & numberOfInvItems, int & lastOrderNum) {
     f.close();
 } // readInventory()
 
-// Max amount of items in inventory.
-const int MAX_INV_ITEMS = 10;
 
+//----------------------------------------------------------------------------
+//                                 isValidOption
+//----------------------------------------------------------------------------
+// Modifies: nothing.
+// Returns: true or false if option is valid or not.
+//----------------------------------------------------------------------------
+bool isValidOption(char option, string validOptions) {
+    // Loop through validOptions string to validate option input.
+    for (int i = 0; i < validOptions.length(); i++) {
+        if (validOptions[i] == option)
+            return true; // Return true if option is found in validOptions string.
+    }
+    return false; // option was not found in validOptions string.
+} // isValidOption
+
+
+//----------------------------------------------------------------------------
+//                                 getMainOption
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // getMainOption
-// isValidOption
+
+
+//----------------------------------------------------------------------------
+//                                 displayInventory
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // displayInventory
+
+
+//----------------------------------------------------------------------------
+//                                 displayList
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // displayList
+
+
+//----------------------------------------------------------------------------
+//                                 makeOrder
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // makeOrder
+
+
+//----------------------------------------------------------------------------
+//                                 startOrder
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // startOrder
+
+
+//----------------------------------------------------------------------------
+//                                 listOrders
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // listOrders
+
+
+//----------------------------------------------------------------------------
+//                                 writeOrders
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // writeOrders
+
+
+//----------------------------------------------------------------------------
+//                                 displayOrder
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // displayOrder
+
+
+//----------------------------------------------------------------------------
+//                                 orderItem
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
 // orderItem
 
+
+//----------------------------------------------------------------------------
+//                                 main
+//----------------------------------------------------------------------------
+// Modifies:
+// Returns: 0
+//----------------------------------------------------------------------------
 int main() {
-        long lastOrderNumber;
-        string menuOption;
-        // Inventory
-        return 0;
-        system("pause");
+    // Variables.
+    double numberOfInvItems;
+    long lastOrderNum;
+    string menuOption;
+    string validOptions = "IOLX";
+
+    // Inventory and orders arrays.
+    item inv[MAX_INV_ITEMS];
+    order orders[MAX_ORDERS];
+
+    // Get inventory from inventory.txt.
+    readInventory(inv, numberOfInvItems, lastOrderNum);
+
+    return 0;
+    system("pause");
 }

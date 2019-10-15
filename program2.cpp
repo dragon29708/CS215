@@ -191,11 +191,27 @@ void displayOrder(order basket) {
 //----------------------------------------------------------------------------
 //                                 startOrder
 //----------------------------------------------------------------------------
-// Given:
-// Modifies:
-// Returns:
+// Given: nothing
+// Modifies: partial array of orders and the last order number
+// Returns: nothing
 //----------------------------------------------------------------------------
-// startOrder
+void startOrder(order orders[], int& numberOfOrders, int& lastOrderNum) {
+    // increment lastOrderNum for new person.
+    lastOrderNum++;
+
+    // populate a new order for a new person.
+    orders[numberOfOrders].orderNumber = lastOrderNum;
+    orders[numberOfOrders].numItems = 0;
+    orders[numberOfOrders].totalPrice = 0;
+
+    // print order number, get name.
+    cout << "Order Number:        " << orders[numberOfOrders].orderNumber << endl;
+    cout << "Enter customer name: ";
+    cin >> orders[numberOfOrders].custName;
+
+    // increment number of orders.
+    numberOfOrders++;
+} // startOrder()
 
 
 //----------------------------------------------------------------------------

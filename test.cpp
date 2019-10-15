@@ -125,7 +125,7 @@ void displayOrder(order basket) {
 // Modifies: partial array of orders and the last order number
 // Returns: nothing
 //----------------------------------------------------------------------------
-void startOrder(order orders[lastOrderNum], int& numberOfOrders, int& lastOrderNum) {
+void startOrder(order orders[], int& numberOfOrders, int& lastOrderNum) {
     // increment lastOrderNum for new person.
     lastOrderNum++;
 
@@ -141,7 +141,7 @@ void startOrder(order orders[lastOrderNum], int& numberOfOrders, int& lastOrderN
 
     // increment number of orders.
     numberOfOrders++;
-}
+} // startOrder()
 
 
 int main() {

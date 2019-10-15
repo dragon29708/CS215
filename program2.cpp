@@ -42,9 +42,12 @@ struct order {
 //----------------------------------------------------------------------------
 //                             readInventory
 //----------------------------------------------------------------------------
+// Given: inventory array, number of inventory items, last order number.
 // Modifies: inventory list (sets numberOfItems to -1 on READ ERROR)
 //           lastOrderNum
-// Reads inventory data from a file into an array of inventory items
+// Returns:  inventory data from a file into an array of inventory items
+//           number of inventory items
+//           last order number
 //----------------------------------------------------------------------------
 void readInventory(item inv[], int& numberOfInvItems, int& lastOrderNum) {
     ifstream f;
@@ -73,6 +76,7 @@ void readInventory(item inv[], int& numberOfInvItems, int& lastOrderNum) {
 //----------------------------------------------------------------------------
 //                                 isValidOption
 //----------------------------------------------------------------------------
+// Given: char option and string of valid char options.
 // Modifies: nothing.
 // Returns: true or false if option is valid or not.
 //----------------------------------------------------------------------------
@@ -82,49 +86,106 @@ bool isValidOption(char option, string validOptions) {
         if (validOptions[i] == option)
             return true; // Return true if option is found in validOptions string.
     }
+
     return false; // option was not found in validOptions string.
-} // isValidOption
+} // isValidOption()
 
 
 //----------------------------------------------------------------------------
 //                                 getMainOption
 //----------------------------------------------------------------------------
-// Modifies:
-// Returns:
+// Given: nothing.
+// Modifies: nothing.
+// Returns: the main menu option (a char: ’I’, ’O’, ’L’, or ’X’)
 //----------------------------------------------------------------------------
-// getMainOption
+char getMainOption() {
+    string userInput;
+    char option;
+    string validOptions = "IOLX";
 
+    // display logo and options.
+    cout << "+------------------------------------------------------+\n";
+    cout << "|                       AMOZON.COM                     |\n";
+    cout << "|                    Andrew Cassidy                    |\n";
+    cout << "+------------------------------------------------------+\n";
+    cout << "I - List our Inventory\n";
+    cout << "O - Make an Order\n";
+    cout << "L - List all Orders made\n";
+    cout << "X - Exit\n";
 
-//----------------------------------------------------------------------------
-//                                 displayInventory
-//----------------------------------------------------------------------------
-// Modifies:
-// Returns:
-//----------------------------------------------------------------------------
-// displayInventory
+    // get option and its first char.
+    cout << "Enter an option: ";
+    if (cin.peek() == '\n')
+        cin.ignore();  // just in case it’s needed
+    getline(cin, userInput);
+    option = toupper(userInput[0]);
+
+    while (!isValidOption(option, validOptions)) {
+        cout << "Invalid option, enter I, O, L, or X!\n";
+
+        // get option again.
+        cout << "Enter an option: ";
+        if (cin.peek() == '\n')
+            cin.ignore();  // just in case it’s needed
+        getline(cin, userInput);
+        option = toupper(userInput[0]);
+    }
+
+    return option;
+} // getMainOption()
 
 
 //----------------------------------------------------------------------------
 //                                 displayList
 //----------------------------------------------------------------------------
-// Modifies:
-// Returns:
+// Given: inventory list and number of items in inventory list.
+// Modifies: nothing
+// Returns: nothing
 //----------------------------------------------------------------------------
-// displayList
+void displayList(item inv[], int numberOfInvItems) {
+    // print out items in list.
+    for (int i = 0; i < numberOfInvItems; i++) {
+        cout << setw(3) << right << i << "  ";
+        cout << setw(12) << left << inv[i].prodCode << "  $";
+        cout << setw(6) << right << setprecision(2) << fixed << inv[i].price << "  ";
+        cout << inv[i].description << endl;
+    }
+} // displayList()
 
 
 //----------------------------------------------------------------------------
-//                                 makeOrder
+//                                 displayInventory
 //----------------------------------------------------------------------------
+// Given: inventory and number of items in inventory.
+// Modifies: nothing
+// Returns: nothing
+//----------------------------------------------------------------------------
+void displayInventory(item inv[], int numberOfInvItems) {
+    // display inventory logo
+    cout << "+------------------------------------------------------+\n";
+    cout << "|                        Products                      |\n";
+    cout << "+------------------------------------------------------+\n";
+    cout << " #   PRODUCT CODE   PRICE   PRODUCT DESCRIPTION         \n";
+    cout << "---  ------------  -------  ----------------------------\n";
+    displayList(inv, numberOfInvItems);
+    cout << "Number of items in inventory: " << numberOfInvItems;
+} // displayInventory()
+
+
+//----------------------------------------------------------------------------
+//                                 displayOrder
+//----------------------------------------------------------------------------
+// Given:
 // Modifies:
 // Returns:
 //----------------------------------------------------------------------------
-// makeOrder
+// displayOrder
 
 
 //----------------------------------------------------------------------------
 //                                 startOrder
 //----------------------------------------------------------------------------
+// Given:
 // Modifies:
 // Returns:
 //----------------------------------------------------------------------------
@@ -132,8 +193,29 @@ bool isValidOption(char option, string validOptions) {
 
 
 //----------------------------------------------------------------------------
+//                                 orderItem
+//----------------------------------------------------------------------------
+// Given:
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
+// orderItem
+
+
+//----------------------------------------------------------------------------
+//                                 makeOrder
+//----------------------------------------------------------------------------
+// Given:
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
+// makeOrder
+
+
+//----------------------------------------------------------------------------
 //                                 listOrders
 //----------------------------------------------------------------------------
+// Given:
 // Modifies:
 // Returns:
 //----------------------------------------------------------------------------
@@ -143,6 +225,7 @@ bool isValidOption(char option, string validOptions) {
 //----------------------------------------------------------------------------
 //                                 writeOrders
 //----------------------------------------------------------------------------
+// Given:
 // Modifies:
 // Returns:
 //----------------------------------------------------------------------------
@@ -150,33 +233,16 @@ bool isValidOption(char option, string validOptions) {
 
 
 //----------------------------------------------------------------------------
-//                                 displayOrder
-//----------------------------------------------------------------------------
-// Modifies:
-// Returns:
-//----------------------------------------------------------------------------
-// displayOrder
-
-
-//----------------------------------------------------------------------------
-//                                 orderItem
-//----------------------------------------------------------------------------
-// Modifies:
-// Returns:
-//----------------------------------------------------------------------------
-// orderItem
-
-
-//----------------------------------------------------------------------------
 //                                 main
 //----------------------------------------------------------------------------
+// Given:
 // Modifies:
 // Returns: 0
 //----------------------------------------------------------------------------
 int main() {
     // Variables.
-    double numberOfInvItems;
-    long lastOrderNum;
+    int numberOfInvItems = -1;
+    int lastOrderNum  = -1;
     string menuOption;
     string validOptions = "IOLX";
 
@@ -186,6 +252,8 @@ int main() {
 
     // Get inventory from inventory.txt.
     readInventory(inv, numberOfInvItems, lastOrderNum);
+
+    displayInventory(inv, numberOfInvItems);
 
     return 0;
     system("pause");

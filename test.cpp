@@ -102,6 +102,15 @@ void displayInventory(item inv[], int numberOfInvItems) {
     cout << "Number of items in inventory: " << numberOfInvItems;
 } // displayInventory()
 
+//----------------------------------------------------------------------------
+//                                 displayOrder
+//----------------------------------------------------------------------------
+// Given:
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
+// displayOrder
+
 
 int main() {
     // Variables.

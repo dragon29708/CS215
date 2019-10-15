@@ -105,17 +105,50 @@ void displayInventory(item inv[], int numberOfInvItems) {
 //----------------------------------------------------------------------------
 //                                 displayOrder
 //----------------------------------------------------------------------------
-// Given:
-// Modifies:
-// Returns:
+// Given: basket
+// Modifies: nothing
+// Returns: nothing
 //----------------------------------------------------------------------------
-// displayOrder
+void displayOrder(order basket) {
+    // display order number and customer name.
+    cout << "Order Number: " << basket.orderNumber << "   " << basket.custName << endl;
+
+    // display orders made by individual customer.
+    displayList(basket.items);
+} // displayOrder()
+
+
+//----------------------------------------------------------------------------
+//                                 startOrder
+//----------------------------------------------------------------------------
+// Given: nothing
+// Modifies: partial array of orders and the last order number
+// Returns: nothing
+//----------------------------------------------------------------------------
+void startOrder(order orders[lastOrderNum], int& numberOfOrders, int& lastOrderNum) {
+    // increment lastOrderNum for new person.
+    lastOrderNum++;
+
+    // populate a new order for a new person.
+    orders[numberOfOrders].orderNumber = lastOrderNum;
+    orders[numberOfOrders].numItems = 0;
+    orders[numberOfOrders].totalPrice = 0;
+
+    // print order number, get name.
+    cout << "Order Number:        " << orders[numberOfOrders].orderNumber << endl;
+    cout << "Enter customer name: ";
+    cin >> orders[numberOfOrders].custName;
+
+    // increment number of orders.
+    numberOfOrders++;
+}
 
 
 int main() {
     // Variables.
-    int numberOfInvItems = -1;
-    int lastOrderNum  = -1;
+    int numberOfInvItems = READ_ERROR;
+    int numberOfOrders = READ_ERROR;
+    int lastOrderNum  = READ_ERROR;
     string menuOption;
     string validOptions = "IOLX";
 

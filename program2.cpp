@@ -175,11 +175,17 @@ void displayInventory(item inv[], int numberOfInvItems) {
 //----------------------------------------------------------------------------
 //                                 displayOrder
 //----------------------------------------------------------------------------
-// Given:
-// Modifies:
-// Returns:
+// Given: basket
+// Modifies: nothing
+// Returns: nothing
 //----------------------------------------------------------------------------
-// displayOrder
+void displayOrder(order basket) {
+    // display order number and customer name.
+    cout << "Order Number: " << basket.orderNumber << "   " << basket.custName << endl;
+
+    // display orders made by individual customer.
+    displayList(basket.items);
+} // displayOrder()
 
 
 //----------------------------------------------------------------------------
@@ -242,6 +248,7 @@ void displayInventory(item inv[], int numberOfInvItems) {
 int main() {
     // Variables.
     int numberOfInvItems = -1;
+    int numberOfOrders = -1;
     int lastOrderNum  = -1;
     string menuOption;
     string validOptions = "IOLX";
@@ -253,6 +260,7 @@ int main() {
     // Get inventory from inventory.txt.
     readInventory(inv, numberOfInvItems, lastOrderNum);
 
+    // display the inventory
     displayInventory(inv, numberOfInvItems);
 
     return 0;

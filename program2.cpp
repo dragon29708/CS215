@@ -279,6 +279,8 @@ int main() {
     // display the inventory
     displayInventory(inv, numberOfInvItems);
 
+    // write out to file
+
     return 0;
     system("pause");
 }

@@ -87,7 +87,7 @@ void displayList(item inv[], int numberOfInvItems) {
 //----------------------------------------------------------------------------
 //                                 displayInventory
 //----------------------------------------------------------------------------
-// Given: inventory and number of items in inventory.
+// Given: inventory and number of items in inventory
 // Modifies: nothing
 // Returns: nothing
 //----------------------------------------------------------------------------
@@ -142,6 +142,48 @@ void startOrder(order orders[], int& numberOfOrders, int& lastOrderNum) {
     // increment number of orders.
     numberOfOrders++;
 } // startOrder()
+
+
+//----------------------------------------------------------------------------
+//                                 orderItem
+//----------------------------------------------------------------------------
+// Given: inventory partial array and number of items in array
+// Modifies: a single basket
+// Returns: true or false
+//----------------------------------------------------------------------------
+bool orderItem(item inv[], int numberOfInvItems, order& basket) {
+    // add orders to basket as long as basket isn't full
+    while (basket.numItems < MAX_ORDER_ITEMS) {
+        // asking what the user wants to order
+        int userInput = 0;
+        cout << "Enter an item number (-1 to end): "; cin >> userInput;
+
+        // if -1 then exit and return true
+        if (userInput = -1)
+            return true;
+        
+        // input validation
+        while (userInput < -1 userInput >= numberOfInvItems) {
+            
+            cout << "Invald entry. Enter number -1 to " << numberOfInvItems - 1 << endl;
+            cout << "Enter an item number (-1 to end): "; cin >> userInput;
+
+            // if -1 then exit and return true
+            if (userInput = -1)
+                return true;
+        }
+
+        // throw item from decision into basket
+        basket.items[basket.numItems]  = inv[userInput];
+        basket.numItems++;
+        basket.totalPrice += inv[userInput].price;
+
+        // print out item being ordered
+        cout << inv[userInput].description << " added to your basket. Current total is $" << setw(6) << setprecision(2) << fixed << right << basket.totalPrice << endl;
+    }
+
+    return false;
+}
 
 
 int main() {

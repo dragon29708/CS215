@@ -178,14 +178,14 @@ bool orderItem(item inv[], int numberOfInvItems, order& basket) {
             basket.numItems++;
             basket.totalPrice += inv[userInput].price;
         }
-        
+
         // print out item being ordered
         cout << inv[userInput].description << " added to your basket. Current total is $" << setw(6) << setprecision(2) << fixed << right << basket.totalPrice << endl;
     }
 
     // user 
     return false;
-}
+} // orderItem()
 
 
 int main() {

@@ -187,7 +187,7 @@ void displayOrder(order basket) {
 	displayList(basket.items, basket.numItems);
 
 	// display total of single basket
-	cout << "Total            FIX THIS!!!!!!!!!!!!!!\n";
+	cout << "Total              $" << setw(6) << setprecision(2) << right << basket.totalPrice << endl;
 
 } // displayOrder()
 
@@ -262,7 +262,7 @@ bool orderItem(item inv[], int numberOfInvItems, order & basket) {
 		cout << inv[userInput].description << " added to your basket. Current total is $" << setw(6) << setprecision(2) << fixed << right << basket.totalPrice << endl;
 	}
 
-	// user 
+	// user
 	return false;
 
 } // orderItem()
@@ -282,7 +282,7 @@ void makeOrder(order orders[], int& numberOfOrders, item inv[], int numberOfInvI
 
 
 		if (!orderItem(inv, numberOfInvItems, orders[numberOfOrders - 1])) {
-			orderItem(inv, numberOfInvItems, orders[numberOfOrders -1]);
+			orderItem(inv, numberOfInvItems, orders[numberOfOrders - 1]);
 		}
 		else {
 			cout << "Thank you for your order!\n";
@@ -323,11 +323,38 @@ void listOrders(order orders[], int numberOfOrders) {
 //----------------------------------------------------------------------------
 //                                 writeOrders
 //----------------------------------------------------------------------------
-// Given:
-// Modifies:
-// Returns:
+// Given: partial array of orders and number of orders
+// Modifies: nothing
+// Returns: nothing
 //----------------------------------------------------------------------------
-// writeOrders
+void writeOrders(order orders[], int numberOfOrders) {
+	ofstream f;
+	f.open("orders.txt");
+
+	// first line write the number of orders
+	f << numberOfOrders << endl;
+
+	// output orders and their indivual baskets
+	for (int i = 0; i < numberOfOrders; i++) {
+		// for each order
+		f << orders[i].orderNumber << " ";
+		f << orders[i].numItems << " ";
+		f << orders[i].totalPrice << " ";
+		f << orders[i].custName << " ";
+		f << endl;
+
+		// for each item within an order
+		for (int j = 0; j < orders[i].numItems; j++) {
+			f << orders[i].items[j].prodCode << " ";
+			f << orders[i].items[j].price << " ";
+			f << orders[i].items[j].description;
+			f << endl;
+		}
+	}
+
+	// close file
+	f.close();
+}
 
 
 //----------------------------------------------------------------------------
@@ -371,7 +398,7 @@ int main() {
 	}
 
 	// write out to file
-
+	writeOrders(orders, numberOfOrders);
 
 	system("pause");
 	return 0;

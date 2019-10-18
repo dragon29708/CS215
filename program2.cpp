@@ -187,7 +187,7 @@ void displayOrder(order basket) {
 	displayList(basket.items, basket.numItems);
 
 	// display total of single basket
-	cout << "Total            FIX THIS!!!!!!!!!!!!!!1"
+	cout << "Total            FIX THIS!!!!!!!!!!!!!!\n";
 
 } // displayOrder()
 
@@ -211,7 +211,7 @@ void startOrder(order orders[], int& numberOfOrders, int& lastOrderNum) {
 	// print order number, get name.
 	cout << "Order Number:        " << orders[numberOfOrders].orderNumber << endl;
 	cout << "Enter customer name: ";
-	cin >> orders[numberOfOrders].custName;
+	getline(cin, orders[numberOfOrders].custName);
 
 	// increment number of orders.
 	numberOfOrders++;

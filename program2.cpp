@@ -296,11 +296,24 @@ void makeOrder(order orders[], int& numberOfOrders, item inv[], int numberOfInvI
 	//----------------------------------------------------------------------------
 	//                                 listOrders
 	//----------------------------------------------------------------------------
-	// Given:
-	// Modifies:
-	// Returns:
+	// Given: partial array of orders
+	// Modifies: nothing
+	// Returns: nothing
 	//----------------------------------------------------------------------------
-	// listOrders
+	void listOrders(order orders[], int numberOfOrders) {
+		// display inventory logo
+		cout << "+------------------------------------------------------+\n";
+		cout << "|                        Orders                        |\n";
+		cout << "+------------------------------------------------------+\n";
+
+		// diplay all the orders
+		for (int i = 0; i < numberOfOrders; i ++) {
+			displayOrder(orders[i]);
+		}
+
+		// display total number of orders
+		cout << "Total Number of Orders = " << numberOfOrders;
+	} // listOrders()
 
 
 	//----------------------------------------------------------------------------
@@ -316,15 +329,15 @@ void makeOrder(order orders[], int& numberOfOrders, item inv[], int numberOfInvI
 	//----------------------------------------------------------------------------
 	//                                 main
 	//----------------------------------------------------------------------------
-	// Given:
-	// Modifies:
+	// Given: nothing
+	// Modifies: everything
 	// Returns: 0
 	//----------------------------------------------------------------------------
 int main() {
 	// Variables.
-	int numberOfInvItems = -1;
-	int numberOfOrders = -1;
-	int lastOrderNum = -1;
+	int numberOfInvItems = READ_ERROR;
+	int numberOfOrders = READ_ERROR;
+	int lastOrderNum = READ_ERROR;
 	string menuOption;
 	string validOptions = "IOLX";
 

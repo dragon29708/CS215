@@ -185,6 +185,10 @@ void displayOrder(order basket) {
 
 	// display orders made by individual customer.
 	displayList(basket.items, basket.numItems);
+
+	// display total of single basket
+	cout << "Total            FIX THIS!!!!!!!!!!!!!!1"
+
 } // displayOrder()
 
 
@@ -277,18 +281,18 @@ void makeOrder(order orders[], int& numberOfOrders, item inv[], int numberOfInvI
 		displayInventory(inv, numberOfInvItems);
 
 
-		if (!orderItem(inv, numberOfInvItems, orders[numberOfOrders])) {
-			orderItem(inv, numberOfInvItems, orders[numberOfOrders]);
+		if (!orderItem(inv, numberOfInvItems, orders[numberOfOrders - 1])) {
+			orderItem(inv, numberOfInvItems, orders[numberOfOrders -1]);
 		}
 		else {
 			cout << "Thank you for your order!\n";
-			displayOrder(orders[numberOfOrders]);
+			displayOrder(orders[numberOfOrders - 1]);
 		}
 
 	}
 	else {
 		cout << "Sorry, we can not take more orders today.\n";
-		displayOrder(orders[numberOfOrders]);
+		displayOrder(orders[numberOfOrders - 1]);
 	}
 } // makeOrder()
 
@@ -346,7 +350,7 @@ int main() {
 
 	// get inventory from inventory.txt
 	readInventory(inv, numberOfInvItems, lastOrderNum);
-	
+
 	while (menuOption != "X") {
 		// get main option
 		menuOption = getMainOption();
@@ -358,6 +362,7 @@ int main() {
 		else if (menuOption == "O") {
 			// make order
 			makeOrder(orders, numberOfOrders, inv, numberOfInvItems, lastOrderNum);
+			system("pause");
 		}
 		else if (menuOption == "L") {
 			// list orders made

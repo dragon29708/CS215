@@ -249,6 +249,11 @@ bool orderItem(item inv[], int numberOfInvItems, order& basket) {
             basket.totalPrice += inv[userInput].price;
         }
 
+        else {
+        	cout << "Sorry, the max number of items per order is " << MAX_ORDER_ITEMS << endl;
+        	return false;
+        }
+
         // print out item being ordered
         cout << inv[userInput].description << " added to your basket. Current total is $" << setw(6) << setprecision(2) << fixed << right << basket.totalPrice << endl;
     }
@@ -262,11 +267,19 @@ bool orderItem(item inv[], int numberOfInvItems, order& basket) {
 //----------------------------------------------------------------------------
 //                                 makeOrder
 //----------------------------------------------------------------------------
-// Given:
-// Modifies:
-// Returns:
+// Given: inventory partial array and number of items in inventory.
+// Modifies: order partial array and number of orders in it, last order number
+// Returns: nothing
 //----------------------------------------------------------------------------
-// makeOrder
+void makeOrder(order orders[], int& numberOfOrders, item inv[], int numberOfInvItems, int& lastOrderNum) {
+	if (numberOfOrders < MAX_ORDERS)
+		startOrder(orders, numberOfOrders, lastOrderNum);
+		displayInventory(inv, numberOfInvItems);
+
+	else {
+		cout << "Sorry, we can not take more orders today.\n";
+
+} // makeOrder()
 
 
 //----------------------------------------------------------------------------

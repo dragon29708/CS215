@@ -334,22 +334,31 @@ void makeOrder(order orders[], int& numberOfOrders, item inv[], int numberOfInvI
 	// Returns: 0
 	//----------------------------------------------------------------------------
 int main() {
-	// Variables.
+	// variables
 	int numberOfInvItems = READ_ERROR;
 	int numberOfOrders = READ_ERROR;
 	int lastOrderNum = READ_ERROR;
 	string menuOption;
 	string validOptions = "IOLX";
 
-	// Inventory and orders arrays.
+	// inventory and orders arrays
 	item inv[MAX_INV_ITEMS];
 	order orders[MAX_ORDERS];
 
-	// Get inventory from inventory.txt.
+	// get inventory from inventory.txt
 	readInventory(inv, numberOfInvItems, lastOrderNum);
+
+	// get main option
+	menuOption = getMainOption();
 
 	// display the inventory
 	displayInventory(inv, numberOfInvItems);
+
+	// make order
+	makeOrder(orders, numberOfOrders, inv, numberOfInvItems, lastOrderNum);
+
+	// list orders made
+	listOrders(order, numberOfOrders);
 
 	// write out to file
 

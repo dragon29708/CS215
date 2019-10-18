@@ -168,7 +168,7 @@ void displayInventory(item inv[], int numberOfInvItems) {
 	cout << " #   PRODUCT CODE   PRICE   PRODUCT DESCRIPTION         \n";
 	cout << "---  ------------  -------  ----------------------------\n";
 	displayList(inv, numberOfInvItems);
-	cout << "Number of items in inventory: " << numberOfInvItems;
+	cout << "Number of items in inventory: " << numberOfInvItems << endl;
 } // displayInventory()
 
 
@@ -300,46 +300,45 @@ void makeOrder(order orders[], int& numberOfOrders, item inv[], int numberOfInvI
 	// Modifies: nothing
 	// Returns: nothing
 	//----------------------------------------------------------------------------
-	void listOrders(order orders[], int numberOfOrders) {
-		// display inventory logo
-		cout << "+------------------------------------------------------+\n";
-		cout << "|                        Orders                        |\n";
-		cout << "+------------------------------------------------------+\n";
+void listOrders(order orders[], int numberOfOrders) {
+	// display inventory logo
+	cout << "+------------------------------------------------------+\n";
+	cout << "|                        Orders                        |\n";
+	cout << "+------------------------------------------------------+\n";
 
-		// diplay all the orders
-		for (int i = 0; i < numberOfOrders; i ++) {
-			displayOrder(orders[i]);
-		}
+	// diplay all the orders
+	for (int i = 0; i < numberOfOrders; i++) {
+		displayOrder(orders[i]);
+	}
 
-		// display total number of orders
-		cout << "Total Number of Orders = " << numberOfOrders;
-	} // listOrders()
-
-
-	//----------------------------------------------------------------------------
-	//                                 writeOrders
-	//----------------------------------------------------------------------------
-	// Given:
-	// Modifies:
-	// Returns:
-	//----------------------------------------------------------------------------
-	// writeOrders
+	// display total number of orders
+	cout << "Total Number of Orders = " << numberOfOrders << endl;
+} // listOrders()
 
 
-	//----------------------------------------------------------------------------
-	//                                 main
-	//----------------------------------------------------------------------------
-	// Given: nothing
-	// Modifies: everything
-	// Returns: 0
-	//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+//                                 writeOrders
+//----------------------------------------------------------------------------
+// Given:
+// Modifies:
+// Returns:
+//----------------------------------------------------------------------------
+// writeOrders
+
+
+//----------------------------------------------------------------------------
+//                                 main
+//----------------------------------------------------------------------------
+// Given: nothing
+// Modifies: everything
+// Returns: 0
+//----------------------------------------------------------------------------
 int main() {
 	// variables
 	int numberOfInvItems = READ_ERROR;
-	int numberOfOrders = READ_ERROR;
+	int numberOfOrders = 0;
 	int lastOrderNum = READ_ERROR;
 	string menuOption;
-	string validOptions = "IOLX";
 
 	// inventory and orders arrays
 	item inv[MAX_INV_ITEMS];
@@ -347,21 +346,28 @@ int main() {
 
 	// get inventory from inventory.txt
 	readInventory(inv, numberOfInvItems, lastOrderNum);
+	
+	while (menuOption != "X") {
+		// get main option
+		menuOption = getMainOption();
 
-	// get main option
-	menuOption = getMainOption();
-
-	// display the inventory
-	displayInventory(inv, numberOfInvItems);
-
-	// make order
-	makeOrder(orders, numberOfOrders, inv, numberOfInvItems, lastOrderNum);
-
-	// list orders made
-	listOrders(order, numberOfOrders);
+		if (menuOption == "I") {
+			// display the inventory
+			displayInventory(inv, numberOfInvItems);
+		}
+		else if (menuOption == "O") {
+			// make order
+			makeOrder(orders, numberOfOrders, inv, numberOfInvItems, lastOrderNum);
+		}
+		else if (menuOption == "L") {
+			// list orders made
+			listOrders(orders, numberOfOrders);
+		}
+	}
 
 	// write out to file
 
-	return 0;
+
 	system("pause");
+	return 0;
 }

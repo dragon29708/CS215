@@ -6,6 +6,7 @@ Author: Andrew Cassidy
 Date: 10/13/2019
 Description: An app that allows customers to order items
 from an inventory of products.
+Assistance: I received help from Spencer Eddins.
 --------------------------------------------------------------------
 */
 
@@ -226,43 +227,37 @@ void startOrder(order orders[], int& numberOfOrders, int& lastOrderNum) {
 // Returns: true or false
 //----------------------------------------------------------------------------
 bool orderItem(item inv[], int numberOfInvItems, order & basket) {
-	// add orders to basket as long as basket isn't full
-	while (basket.numItems <= MAX_ORDER_ITEMS) {
-		// asking what the user wants to order
-		int userInput = 0;
+	// asking what the user wants to order
+	int userInput = 0;
+	cout << "Enter an item number (-1 to end): "; cin >> userInput;
+
+	// if -1 then exit and return true
+	if (userInput == -1)
+		return true;
+
+	// input validation
+	while (userInput < -1 || userInput >= numberOfInvItems) {
+		cout << "Invald entry. Enter number -1 to " << numberOfInvItems - 1 << endl;
 		cout << "Enter an item number (-1 to end): "; cin >> userInput;
 
 		// if -1 then exit and return true
 		if (userInput == -1)
 			return true;
-
-		// input validation
-		while (userInput < -1 || userInput >= numberOfInvItems) {
-			cout << "Invald entry. Enter number -1 to " << numberOfInvItems - 1 << endl;
-			cout << "Enter an item number (-1 to end): "; cin >> userInput;
-
-			// if -1 then exit and return true
-			if (userInput == -1)
-				return true;
-		}
-
-		if (basket.numItems < MAX_ORDER_ITEMS) {
-			// throw item from decision into basket
-			basket.items[basket.numItems] = inv[userInput];
-			basket.numItems++;
-			basket.totalPrice += inv[userInput].price;
-		}
-
-		else {
-			cout << "Sorry, the max number of items per order is " << MAX_ORDER_ITEMS << endl;
-			return false;
-		}
-
-		// print out item being ordered
-		cout << inv[userInput].description << " added to your basket. Current total is $" << setw(6) << setprecision(2) << fixed << right << basket.totalPrice << endl;
 	}
 
-	// user
+	if (basket.numItems < MAX_ORDER_ITEMS) {
+		// throw item from decision into basket
+		basket.items[basket.numItems] = inv[userInput];
+		basket.numItems++;
+		basket.totalPrice += inv[userInput].price;
+	}
+	else {
+		cout << "Sorry, the max number of items per order is " << MAX_ORDER_ITEMS << endl;
+		return true;
+	}
+
+	// print out item being ordered
+	cout << inv[userInput].description << " added to your basket. Current total is $" << setw(6) << setprecision(2) << fixed << right << basket.totalPrice << endl;
 	return false;
 
 } // orderItem()
@@ -276,24 +271,22 @@ bool orderItem(item inv[], int numberOfInvItems, order & basket) {
 // Returns: nothing
 //----------------------------------------------------------------------------
 void makeOrder(order orders[], int& numberOfOrders, item inv[], int numberOfInvItems, int& lastOrderNum) {
-	if (numberOfOrders < MAX_ORDERS) {
+	if (numberOfOrders >= MAX_ORDERS) {
+		cout << "Sorry, we can not take more orders today.\n\n";
+	}
+	else {
 		startOrder(orders, numberOfOrders, lastOrderNum);
 		displayInventory(inv, numberOfInvItems);
 
-
-		if (!orderItem(inv, numberOfInvItems, orders[numberOfOrders - 1])) {
-			orderItem(inv, numberOfInvItems, orders[numberOfOrders - 1]);
+		// iterate over the max items in an order and make sure orderItem() isnt true (asked to leave)
+		for (int i = 0; i <= MAX_ORDER_ITEMS && !orderItem(inv, numberOfInvItems, orders[numberOfOrders - 1]); i++) {
+			if (i >= MAX_ORDER_ITEMS)
+				cout << "Sorry, the max number of items per order is " << MAX_ORDER_ITEMS << endl;
 		}
-		else {
-			cout << "Thank you for your order!\n";
-			displayOrder(orders[numberOfOrders - 1]);
-		}
+	}
 
-	}
-	else {
-		cout << "Sorry, we can not take more orders today.\n";
-		displayOrder(orders[numberOfOrders - 1]);
-	}
+	cout << "Thank you for your order!\n";
+	displayOrder(orders[numberOfOrders - 1]);
 } // makeOrder()
 
 
@@ -316,7 +309,7 @@ void listOrders(order orders[], int numberOfOrders) {
 	}
 
 	// display total number of orders
-	cout << "Total Number of Orders = " << numberOfOrders << endl;
+	cout << "Total Number of Orders = " << numberOfOrders << endl << endl;
 } // listOrders()
 
 

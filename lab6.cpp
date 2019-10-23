@@ -11,6 +11,7 @@ division etc.
 */
 
 #include<iostream>
+#include<iomanip>
 
 using namespace std;
 
@@ -42,7 +43,6 @@ frac AskFraction() {
 
     // return valid fraction
     return myFrac;
-
 } // AskFraction()
 
 
@@ -50,23 +50,49 @@ frac AskFraction() {
 //                            DecimalValue
 //------------------------------------------------------------------
 double DecimalValue(frac myFrac) {
+    // return the decimal value of the inputted fraction
     return myFrac.num / static_cast<float>((myFrac.den));
 } // DecimalValue()
 
 
+//------------------------------------------------------------------
+//                            PrintFraction
+//------------------------------------------------------------------
+void PrintFraction(frac myFrac) {
+    // the numerator (use a width of 3)
+    cout << setw(3) << right << myFrac.num << endl;
+
+    // four dashes, an equal sign, and the decimal value; invoke DecimalValue()
+    cout << "----  = " << DecimalValue(myFrac) << endl;
+
+    // the denominator (use a width of 3)
+    cout << setw(3) << right << myFrac.den << endl;
+} // PrintFraction()
 
 
 //------------------------------------------------------------------
-//                            Main
+//                            Multiply
+//------------------------------------------------------------------
+double Multiply(frac frac1, frac frac2) {
+    // calculate product of frac1 and frac 2
+    product = DecimalValue(frac1) * DecimalValue(frac2);
+
+    // return product
+    return product;
+} // Multiply()
+
+
+//------------------------------------------------------------------
+//                            main
 //------------------------------------------------------------------
 int main() {
 
     // get fraction from user
-    frac myFrac = AskFraction();
+    frac myFrac1 = AskFraction();
 
-    // get decimal value of fraction
-    cout << DecimalValue(myFrac) << endl;
+    // print out fraction
+    PrintFraction(myFrac);
 
     system("pause");
     return 0;
-}
+} // main()

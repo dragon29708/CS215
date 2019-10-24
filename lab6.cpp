@@ -101,7 +101,7 @@ frac Add(frac frac1, frac frac2) {
     }
     // if denominators are different
     else {
-        // get the same denominator for adding
+        // change the numerators and then the same denominator (order matters)
         frac1.num = frac1.num * frac2.den;
         frac2.num = frac2.num * frac1.den;
         frac1.den = frac1.den * frac2.den;
@@ -115,6 +115,14 @@ frac Add(frac frac1, frac frac2) {
     // return sum
     return sum;
 } // Add()
+
+
+//------------------------------------------------------------------
+//                            Simplify
+//------------------------------------------------------------------
+void Simplify(frac& myFrac) {
+
+} // Simplify()
 
 
 //------------------------------------------------------------------
@@ -138,6 +146,7 @@ int main() {
 
     // print out product simplified
     cout << "\nPRODUCT SIMPLIFIED:\n";
+    PrintFraction(Simplify(myFrac1, myFrac2));
 
     system("pause");
     return 0;

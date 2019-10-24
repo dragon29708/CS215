@@ -73,9 +73,14 @@ void PrintFraction(frac myFrac) {
 //------------------------------------------------------------------
 //                            Multiply
 //------------------------------------------------------------------
-double Multiply(frac frac1, frac frac2) {
-    // calculate product of frac1 and frac 2
-    product = DecimalValue(frac1) * DecimalValue(frac2);
+frac Multiply(frac frac1, frac frac2) {
+    frac product;
+
+    // numerator of product
+    product.num = frac1.num * frac2.num;
+
+    // denominator of product
+    product.den = frac1.den * frac2.den;
 
     // return product
     return product;
@@ -87,11 +92,16 @@ double Multiply(frac frac1, frac frac2) {
 //------------------------------------------------------------------
 int main() {
 
-    // get fraction from user
+    // get fractions from user
     frac myFrac1 = AskFraction();
+    frac myFrac2 = AskFraction();
 
     // print out fraction
-    PrintFraction(myFrac);
+    PrintFraction(myFrac1);
+    PrintFraction(myFrac2);
+
+    // print out multiplication of two fractions
+    PrintFraction(Multiply(myFrac1, myFrac2));
 
     system("pause");
     return 0;

@@ -138,15 +138,18 @@ int main() {
 
     // print out multiplication of two fractions
     cout << "PRODUCT:\n";
-    PrintFraction(Multiply(myFrac1, myFrac2));
+    frac prodFrac = Multiply(myFrac1, myFrac2);
+    PrintFraction(prodFrac);
 
     // print out addition of two fractions
     cout << "\nSUM:\n";
-    PrintFraction(Add(myFrac1, myFrac2));
+    frac addedFrac = Add(myFrac1, myFrac2);
+    PrintFraction(addedFrac);
 
     // print out product simplified
     cout << "\nPRODUCT SIMPLIFIED:\n";
-    PrintFraction(Simplify(myFrac1, myFrac2));
+    Simplify(prodFrac);
+    PrintFraction(prodFrac);
 
     system("pause");
     return 0;

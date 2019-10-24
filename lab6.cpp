@@ -32,13 +32,13 @@ frac AskFraction() {
     myFrac.den = 0;
 
     // get info from user for myFrac
-    cout << "Enter numerator: "; cin >> myFrac.num;
+    cout << "Enter numerator:       "; cin >> myFrac.num;
 
-    cout << "Enter denominator: "; cin >> myFrac.den;
+    cout << "Enter denominator > 0: "; cin >> myFrac.den;
     // input validation for denominator
     while (myFrac.den <= 0) {
         cout << "Invalid entry. Enter an integer > 0\n";
-        cout << "Enter denominator: "; cin >> myFrac.den;
+        cout << "Enter denominator > 0: "; cin >> myFrac.den;
     }
 
     // return valid fraction
@@ -88,20 +88,56 @@ frac Multiply(frac frac1, frac frac2) {
 
 
 //------------------------------------------------------------------
+//                            Add
+//------------------------------------------------------------------
+frac Add(frac frac1, frac frac2) {
+    frac sum;
+
+    // if denominators are same
+    if (frac1.den == frac2.den) {
+        // add numerators and keep denominator the same
+        sum.num = frac1.num + frac2.num;
+        sum.den = frac1.den;
+    }
+    // if denominators are different
+    else {
+        // get the same denominator for adding
+        frac1.num = frac1.num * frac2.den;
+        frac2.num = frac2.num * frac1.den;
+        frac1.den = frac1.den * frac2.den;
+        frac2.den = frac2.den * frac1.den;
+
+        // add numerators once denominators are same
+        sum.num = frac1.num + frac2.num;
+        sum.den = frac1.den;
+    }
+
+    // return sum
+    return sum;
+} // Add()
+
+
+//------------------------------------------------------------------
 //                            main
 //------------------------------------------------------------------
 int main() {
 
     // get fractions from user
+    cout << "FRACTION 1:\n";
     frac myFrac1 = AskFraction();
+    cout << endl << "FRACTION 2:\n";
     frac myFrac2 = AskFraction();
 
-    // print out fraction
-    PrintFraction(myFrac1);
-    PrintFraction(myFrac2);
-
     // print out multiplication of two fractions
+    cout << "PRODUCT:\n";
     PrintFraction(Multiply(myFrac1, myFrac2));
+
+    // print out addition of two fractions
+    cout << "\nSUM:\n";
+    PrintFraction(Add(myFrac1, myFrac2));
+
+    // print out product simplified
+    cout << "\nPRODUCT SIMPLIFIED:\n";
 
     system("pause");
     return 0;

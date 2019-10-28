@@ -121,7 +121,13 @@ frac Add(frac frac1, frac frac2) {
 //                            Simplify
 //------------------------------------------------------------------
 void Simplify(frac& myFrac) {
-
+    // simplify the num and den when each are divisible by an int checking from den until 2
+    for (int i = myFrac.den; i >= 2; i--) {
+        if (myFrac.num % i == 0 && myFrac.den % i == 0) {
+            myFrac.num /= i;
+            myFrac.den /= i;
+        }
+    }
 } // Simplify()
 
 

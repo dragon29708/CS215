@@ -6,11 +6,11 @@
 // This program tests the student class for lab 8.
 //--------------------------------------------------------
 
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<string>
 using namespace std;
-#include "student.h"
-#include "student.cpp"
+#include"student.h"
+#include"student.cpp"
 
 int main() {
 	student s;		// create one student object

@@ -27,22 +27,22 @@ student::student() {
 }
 
 
-void setName(string newName) {
+void student::setName(string newName) {
 	name = newName;
 }
 
 
-string getName() {
+string student::getName() {
 	return name;
 }
 
 
-int GetNumScores() {
+int student::GetNumScores() {
 	return numScores;
 }
 
 
-void addScore(int newScore) {
+void student::addScore(int newScore) {
 	if (numScores == MAX_SCORES)
 		cout << "MAX SCORES exceeded!\n";
 	else
@@ -50,7 +50,7 @@ void addScore(int newScore) {
 }
 
 
-float getAvg() {
+float student::getAvg() {
 	if (numScores == 0)
 		return 0.0;
 	else {
@@ -66,7 +66,7 @@ float getAvg() {
 }
 
 
-void print() {
+void student::print() {
 	cout << "Name=" << name << "   Avg=" << getAvg() << " #scores=" << numScores << "  ";
 	for (int i = 0; i < numScores; i++)
 		cout << scores[i] << " ";

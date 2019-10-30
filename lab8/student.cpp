@@ -7,6 +7,7 @@
 //--------------------------------------------------------
 
 #include<iostream>
+#include<string>
 using namespace std;
 #include "student.h"
 
@@ -26,22 +27,22 @@ student::student() {
 }
 
 
-void student::setName(string newName) {
+void setName(string newName) {
 	name = newName;
 }
 
 
-string student::getName() {
+string getName() {
 	return name;
 }
 
 
-int student::GetNumScores() {
+int GetNumScores() {
 	return numScores;
 }
 
 
-void student::addScore(int newScore) {
+void addScore(int newScore) {
 	if (numScores == MAX_SCORES)
 		cout << "MAX SCORES exceeded!\n";
 	else
@@ -49,7 +50,7 @@ void student::addScore(int newScore) {
 }
 
 
-float student::getAvg() {
+float getAvg() {
 	if (numScores == 0)
 		return 0.0;
 	else {
@@ -65,7 +66,7 @@ float student::getAvg() {
 }
 
 
-void student::print() {
+void print() {
 	cout << "Name=" << name << "   Avg=" << getAvg() << " #scores=" << numScores << "  ";
 	for (int i = 0; i < numScores; i++)
 		cout << scores[i] << " ";

@@ -1,17 +1,11 @@
-//--------------------------------------------------------
-//                CS 215 - Fall 2019 - Lab 8
-//--------------------------------------------------------
-// Author: Andrew Cassidy
-// Section: 401
-// student class definition used in lab 8
-//--------------------------------------------------------
-
-
+#pragma once
 #include<string>
+
+using namespace std;
 
 const int MAX_SCORES = 10;
 
-class student {
+class student{
 public:
 	student();
 	void setName(string newName);

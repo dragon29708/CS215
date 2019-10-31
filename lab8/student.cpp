@@ -8,8 +8,8 @@
 
 #include<iostream>
 #include<string>
-using namespace std;
 #include "student.h"
+using namespace std;
 
 student::student() {
 	// initialize name to empty string
@@ -45,8 +45,10 @@ int student::GetNumScores() {
 void student::addScore(int newScore) {
 	if (numScores == MAX_SCORES)
 		cout << "MAX SCORES exceeded!\n";
-	else
+	else {
 		scores[numScores] = newScore;
+		numScores++;
+	}
 }
 
 
@@ -58,7 +60,7 @@ float student::getAvg() {
 		float total = 0;
 		for (int i = 0; i < numScores; i++)
 			total += scores[i];
-		
+
 		// calc and return avg of all scores
 		float avg = total / numScores;
 		return avg;

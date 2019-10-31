@@ -6,10 +6,7 @@
 // Function members for student class used in lab 8
 //--------------------------------------------------------
 
-#include<iostream>
-#include<string>
-#include "student.h"
-using namespace std;
+#include"student.h"
 
 student::student() {
 	// initialize name to empty string
